@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Search, X, Navigation, Check, Compass } from 'lucide-react';
+import { MapPin, Search, X, Navigation } from 'lucide-react';
 
 const INDIAN_PRESET_CITIES = [
   "Vijayawada",
@@ -17,8 +17,7 @@ export default function LocationInput({
   onCityChange,
   userCoords,
   onTriggerLocation,
-  onResetLocation,
-  locationStatus
+  onResetLocation
 }) {
   const [inputValue, setInputValue] = useState(city);
 
@@ -38,16 +37,14 @@ export default function LocationInput({
   };
 
   return (
-    <div className="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 sm:p-5 shadow-lg backdrop-blur-sm">
+    <div className="bg-[#12141a]/90 border border-white/[0.08] rounded-2xl p-4 sm:p-5 shadow-lg backdrop-blur-md">
       <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-        {/* Title & Input form */}
+        {/* Input area */}
         <div className="flex-1">
-          <div className="flex items-center gap-2 mb-1.5">
-            <Compass className="w-4 h-4 text-indigo-400" />
-            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300">
-              Where are you in India?
-            </h2>
-            <span className="text-[10px] text-slate-500 font-medium">(Optional)</span>
+          <div className="flex items-center gap-2 mb-2 text-xs font-semibold text-slate-300">
+            <MapPin className="w-3.5 h-3.5 text-amber-400" />
+            <span>Departing from or exploring near:</span>
+            <span className="text-[11px] text-slate-500 font-normal">(Optional)</span>
           </div>
 
           <form onSubmit={handleSubmit} className="relative">
@@ -57,14 +54,14 @@ export default function LocationInput({
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onBlur={() => onCityChange(inputValue)}
-              placeholder="Search an Indian city (e.g. Vijayawada, Visakhapatnam, Hyderabad)..."
-              className="w-full bg-slate-950/80 border border-slate-700/70 focus:border-indigo-500 rounded-xl pl-10 pr-9 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none transition-colors"
+              placeholder="Enter an Indian city (e.g. Vijayawada, Visakhapatnam, Hyderabad, Bengaluru)..."
+              className="w-full bg-[#0a0b0e] border border-white/10 focus:border-amber-400/60 rounded-xl pl-10 pr-9 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none transition-colors"
             />
             {inputValue && (
               <button
                 type="button"
                 onClick={handleClear}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 p-0.5 rounded"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 p-0.5 rounded cursor-pointer"
                 title="Clear location"
               >
                 <X className="w-4 h-4" />
@@ -73,7 +70,7 @@ export default function LocationInput({
           </form>
         </div>
 
-        {/* Geolocation Button */}
+        {/* Optional Distance Toggle */}
         <div className="shrink-0 flex items-end">
           {userCoords ? (
             <div className="flex items-center gap-2">
@@ -84,7 +81,7 @@ export default function LocationInput({
               <button
                 type="button"
                 onClick={onResetLocation}
-                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs border border-slate-700 transition-colors"
+                className="p-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-slate-400 hover:text-white text-xs border border-white/10 transition-colors cursor-pointer"
                 title="Reset location"
               >
                 <X className="w-3.5 h-3.5" />
@@ -94,19 +91,19 @@ export default function LocationInput({
             <button
               type="button"
               onClick={onTriggerLocation}
-              className="w-full md:w-auto inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white text-xs font-medium border border-slate-700/80 transition-colors cursor-pointer"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white text-xs font-medium border border-white/10 transition-colors cursor-pointer"
             >
-              <MapPin className="w-3.5 h-3.5 text-indigo-400" />
-              Use Current Location
+              <Navigation className="w-3.5 h-3.5 text-amber-400" />
+              Detect Distance
             </button>
           )}
         </div>
       </div>
 
-      {/* Indian Preset Cities */}
-      <div className="mt-3 pt-3 border-t border-slate-800/60 flex flex-wrap items-center gap-1.5">
-        <span className="text-[11px] font-semibold text-slate-500 mr-1">
-          Suggestions:
+      {/* Indian preset pills */}
+      <div className="mt-3 pt-3 border-t border-white/[0.06] flex flex-wrap items-center gap-1.5">
+        <span className="text-[11px] font-medium text-slate-500 mr-1 font-mono uppercase tracking-wider">
+          Suggested hubs:
         </span>
         {INDIAN_PRESET_CITIES.map((cityPreset) => {
           const isActive = inputValue.toLowerCase() === cityPreset.toLowerCase();
@@ -115,10 +112,10 @@ export default function LocationInput({
               key={cityPreset}
               type="button"
               onClick={() => handlePresetClick(cityPreset)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                 isActive
-                  ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/30'
-                  : 'bg-slate-800/60 hover:bg-slate-800 text-slate-300 border border-slate-700/40'
+                  ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40'
+                  : 'bg-white/[0.03] hover:bg-white/[0.07] text-slate-400 hover:text-slate-200 border border-white/[0.06]'
               }`}
             >
               {cityPreset}

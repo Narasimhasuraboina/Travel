@@ -3,54 +3,63 @@ import { motion } from 'framer-motion';
 
 /**
  * MoodCard Component
- * Modern consumer-grade mood card with subtle animations and atmospheric glow.
+ * Crafted with editorial restraint, typography, and warm tactile feedback.
  */
 export default function MoodCard({ mood, isSelected, onSelect }) {
-  const { name, emoji, tagline, colorTheme } = mood;
+  const { name, evocativeTitle, emoji, tagline, colorTheme } = mood;
 
   return (
     <motion.button
       type="button"
-      whileHover={{ y: -4, scale: 1.02 }}
+      whileHover={{ y: -3 }}
       whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.15 }}
       onClick={() => onSelect(mood.id)}
       className={`group relative text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer ${
         isSelected
-          ? `bg-slate-900 ${colorTheme.border} ring-2 ring-indigo-500/50 shadow-xl ${colorTheme.glow}`
-          : 'bg-slate-900/60 hover:bg-slate-900/95 border-slate-800 hover:border-slate-700 shadow-md'
+          ? `bg-[#13151c] ${colorTheme.border} ring-1 ring-white/20 shadow-xl`
+          : 'bg-[#101217]/70 hover:bg-[#151720] border-white/[0.08] hover:border-white/20 shadow-sm'
       }`}
     >
-      {/* Subtle Background Glow when selected */}
+      {/* Subtle mood illumination background */}
       {isSelected && (
-        <div className={`absolute inset-0 bg-gradient-to-br ${colorTheme.gradient} opacity-20 pointer-events-none`} />
+        <div
+          className="absolute inset-0 opacity-20 pointer-events-none transition-opacity duration-500"
+          style={{ background: `radial-gradient(circle at 100% 0%, ${colorTheme.aura}, transparent 70%)` }}
+        />
       )}
 
       <div>
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <span className="text-3xl sm:text-4xl filter drop-shadow-sm transition-transform duration-200 group-hover:scale-110">
+        {/* Top Header: Evocative title & subtle icon */}
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <span className="text-2xl filter drop-shadow-sm select-none">
             {emoji}
           </span>
-          {isSelected && (
-            <span className={`text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full border ${colorTheme.badge}`}>
-              Active
-            </span>
-          )}
+          <span className={`text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full border transition-colors ${
+            isSelected
+              ? colorTheme.badge
+              : 'bg-white/[0.04] text-slate-400 border-white/[0.06]'
+          }`}>
+            {evocativeTitle || name}
+          </span>
         </div>
 
-        <h3 className={`text-base sm:text-lg font-bold transition-colors ${
-          isSelected ? 'text-white' : 'text-slate-100 group-hover:text-white'
+        {/* Mood Name */}
+        <h3 className={`font-serif text-lg sm:text-xl font-bold tracking-tight transition-colors ${
+          isSelected ? 'text-white' : 'text-slate-200 group-hover:text-white'
         }`}>
           {name}
         </h3>
 
-        <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+        {/* Natural Travel Tagline */}
+        <p className="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">
           {tagline}
         </p>
       </div>
 
-      <div className="mt-4 pt-2 flex items-center justify-between text-[11px] text-slate-500 group-hover:text-indigo-400 font-medium transition-colors">
-        <span>Explore vibes</span>
+      {/* Card Footnote */}
+      <div className="mt-4 pt-3 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-medium text-slate-500 group-hover:text-slate-300 transition-colors">
+        <span>Explore this mood</span>
         <span className="transition-transform group-hover:translate-x-1">→</span>
       </div>
     </motion.button>

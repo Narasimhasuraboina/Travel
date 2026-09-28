@@ -1,218 +1,277 @@
 /**
- * MoodTrip - Moods Catalog
- * Defines all 15 supported emotional states with distinct personalities,
- * visual atmosphere colors, and recommendation nuances.
+ * MoodTrip - Curated Emotional Palette
+ * Written with editorial warmth, evocative travel resonance, and authentic Indian character.
  */
 
 export const MOODS = [
   {
-    id: "happy",
-    name: "Happy",
-    emoji: "☀️",
-    tagline: "Sun-drenched celebrations & vibrant escapes",
-    description: "You're radiating positive energy and looking for sunlit shores, joyful festivals, lively streets, and vibrant colors.",
+    id: "romantic",
+    name: "Romantic",
+    evocativeTitle: "Poetic & Intimate",
+    emoji: "❤️",
+    tagline: "Misty hill cottages, royal lake palaces & candlelit boat rides",
+    description: "Seeking poetic vistas, heritage courtyards, secluded beach coves, and quiet evening shikaras at golden hour.",
+    curatedVibe: "Lake Pichola sunsets, misty Munnar tea trails & French Quarter promenades",
     colorTheme: {
-      gradient: "from-amber-500/20 via-yellow-500/10 to-orange-500/20",
-      accent: "text-amber-400",
-      border: "border-amber-500/40",
-      badge: "bg-amber-500/10 text-amber-300 border-amber-500/30",
-      glow: "shadow-amber-500/10"
+      gradient: "from-rose-950/40 via-stone-900 to-[#0b0c10]",
+      accent: "text-rose-300",
+      accentBg: "bg-rose-500/10",
+      border: "border-rose-500/30",
+      badge: "bg-rose-950/60 text-rose-200 border-rose-800/40",
+      pillActive: "bg-rose-600 text-white shadow-rose-900/40",
+      aura: "rgba(225, 29, 72, 0.12)"
     }
   },
   {
     id: "peaceful",
     name: "Peaceful",
+    evocativeTitle: "Stillness & Greenery",
     emoji: "🌿",
-    tagline: "Tranquil tea valleys, silent lakes & calm shores",
-    description: "Seeking stillness, fresh mountain breeze, sacred riverbanks, and calm natural sanctuaries to quiet the mind.",
+    tagline: "Tranquil tea valleys, silent lakes & mountain morning mist",
+    description: "A desire to slow down, breathe pine-scented air, hear birdsong over tea leaves, and quiet the inner dialogue.",
+    curatedVibe: "Araku Valley coffee estates, quiet Dal Lake houseboats & Munnar mists",
     colorTheme: {
-      gradient: "from-emerald-500/20 via-teal-500/10 to-green-500/20",
-      accent: "text-emerald-400",
-      border: "border-emerald-500/40",
-      badge: "bg-emerald-500/10 text-emerald-300 border-emerald-500/30",
-      glow: "shadow-emerald-500/10"
-    }
-  },
-  {
-    id: "romantic",
-    name: "Romantic",
-    emoji: "❤️",
-    tagline: "Misty hills, royal lake palaces & golden sunsets",
-    description: "Looking for poetic vistas, heritage courtyards, secluded beach coves, and starlit river cruises with someone special.",
-    colorTheme: {
-      gradient: "from-rose-500/20 via-pink-500/10 to-red-500/20",
-      accent: "text-rose-400",
-      border: "border-rose-500/40",
-      badge: "bg-rose-500/10 text-rose-300 border-rose-500/30",
-      glow: "shadow-rose-500/10"
+      gradient: "from-emerald-950/40 via-stone-900 to-[#0b0c10]",
+      accent: "text-emerald-300",
+      accentBg: "bg-emerald-500/10",
+      border: "border-emerald-500/30",
+      badge: "bg-emerald-950/60 text-emerald-200 border-emerald-800/40",
+      pillActive: "bg-emerald-600 text-white shadow-emerald-900/40",
+      aura: "rgba(16, 185, 129, 0.12)"
     }
   },
   {
     id: "relaxed",
     name: "Relaxed",
+    evocativeTitle: "Slow Living & Sea Air",
     emoji: "☕",
-    tagline: "Slow coastal living, plantation stays & unhurried walks",
-    description: "Unwinding with no deadlines, sipping aromatic South Indian filter coffee, watching backwater ripples, and breathing easy.",
+    tagline: "Coastal hammocks, filter coffee mornings & unhurried walks",
+    description: "Living without deadlines: sipping freshly roasted coffee in a quiet tiffin room, watching waves break, and unhurried beach strolls.",
+    curatedVibe: "Varkala cliff-side cafes, South Goa palm groves & Pondicherry bakeries",
     colorTheme: {
-      gradient: "from-teal-500/20 via-cyan-500/10 to-emerald-500/20",
-      accent: "text-teal-400",
-      border: "border-teal-500/40",
-      badge: "bg-teal-500/10 text-teal-300 border-teal-500/30",
-      glow: "shadow-teal-500/10"
-    }
-  },
-  {
-    id: "energetic",
-    name: "Energetic",
-    emoji: "⚡",
-    tagline: "Pulsating night markets, watersports & buzzing streets",
-    description: "Craving motion, exhilarating coastal sports, buzzing street food alleys, music-filled beaches, and high spirits.",
-    colorTheme: {
-      gradient: "from-orange-500/20 via-amber-500/10 to-red-500/20",
-      accent: "text-orange-400",
-      border: "border-orange-500/40",
-      badge: "bg-orange-500/10 text-orange-300 border-orange-500/30",
-      glow: "shadow-orange-500/10"
-    }
-  },
-  {
-    id: "adventurous",
-    name: "Adventurous",
-    emoji: "🧭",
-    tagline: "High mountain passes, river rapids & coral reefs",
-    description: "Ready to conquer rugged trails, high-altitude passes, rafting roaring rivers, or diving deep into island reefs.",
-    colorTheme: {
-      gradient: "from-blue-600/20 via-cyan-500/10 to-indigo-600/20",
-      accent: "text-cyan-400",
-      border: "border-cyan-500/40",
-      badge: "bg-cyan-500/10 text-cyan-300 border-cyan-500/30",
-      glow: "shadow-cyan-500/10"
+      gradient: "from-teal-950/40 via-stone-900 to-[#0b0c10]",
+      accent: "text-teal-300",
+      accentBg: "bg-teal-500/10",
+      border: "border-teal-500/30",
+      badge: "bg-teal-950/60 text-teal-200 border-teal-800/40",
+      pillActive: "bg-teal-600 text-white shadow-teal-900/40",
+      aura: "rgba(20, 184, 166, 0.12)"
     }
   },
   {
     id: "spiritual",
     name: "Spiritual",
+    evocativeTitle: "Sacred & Devotional",
     emoji: "🪔",
-    tagline: "Sacred ghats, ancient temple towers & divine peace",
-    description: "Connecting to timeless devotion, ringing temple bells, sacred evening aartis on ancient riverbanks, and meditative grace.",
+    tagline: "Ancient river ghats, sacred temple aartis & meditative peace",
+    description: "Connecting to timeless devotion, ringing temple bells, sacred evening river rituals, and soul-elevating chants.",
+    curatedVibe: "Varanasi Ganga Aarti, Rishikesh Himalayan ashrams & Tirupati sacred hills",
     colorTheme: {
-      gradient: "from-amber-600/25 via-orange-500/15 to-yellow-600/25",
-      accent: "text-amber-400",
-      border: "border-amber-500/40",
-      badge: "bg-amber-600/10 text-amber-300 border-amber-600/30",
-      glow: "shadow-amber-600/10"
+      gradient: "from-amber-950/40 via-stone-900 to-[#0b0c10]",
+      accent: "text-amber-300",
+      accentBg: "bg-amber-500/10",
+      border: "border-amber-500/30",
+      badge: "bg-amber-950/60 text-amber-200 border-amber-800/40",
+      pillActive: "bg-amber-600 text-white shadow-amber-900/40",
+      aura: "rgba(245, 158, 11, 0.14)"
+    }
+  },
+  {
+    id: "happy",
+    name: "Happy",
+    evocativeTitle: "Sunlit & Celebratory",
+    emoji: "☀️",
+    tagline: "Vibrant coastal shacks, cheerful bazaars & sun-soaked days",
+    description: "Radiating optimism, laughter, warm ocean breezes, festive street flavors, and spontaneous explorations.",
+    curatedVibe: "Sunny Goa beaches, colorful Jaipur old city & lively Mumbai seafronts",
+    colorTheme: {
+      gradient: "from-yellow-950/40 via-stone-900 to-[#0b0c10]",
+      accent: "text-yellow-300",
+      accentBg: "bg-yellow-500/10",
+      border: "border-yellow-500/30",
+      badge: "bg-yellow-950/60 text-yellow-200 border-yellow-800/40",
+      pillActive: "bg-yellow-600 text-slate-950 shadow-yellow-900/40",
+      aura: "rgba(234, 179, 8, 0.12)"
+    }
+  },
+  {
+    id: "energetic",
+    name: "Energetic",
+    evocativeTitle: "Electric & High Tempo",
+    emoji: "⚡",
+    tagline: "Pulsating night markets, water sports & high-tempo streets",
+    description: "Thriving on motion, coastal water sports, bustling evening Khau Galli food lanes, and lively rhythm.",
+    curatedVibe: "Rushikonda surfing, Mumbai nightscapes & energetic Hyderabad streets",
+    colorTheme: {
+      gradient: "from-orange-950/40 via-stone-900 to-[#0b0c10]",
+      accent: "text-orange-300",
+      accentBg: "bg-orange-500/10",
+      border: "border-orange-500/30",
+      badge: "bg-orange-950/60 text-orange-200 border-orange-800/40",
+      pillActive: "bg-orange-600 text-white shadow-orange-900/40",
+      aura: "rgba(249, 115, 22, 0.12)"
+    }
+  },
+  {
+    id: "adventurous",
+    name: "Adventurous",
+    evocativeTitle: "Raw & Rugged",
+    emoji: "🧭",
+    tagline: "High mountain passes, roaring river rapids & coral reefs",
+    description: "Craving the untamed: navigating high-altitude Himalayan passes, whitewater rafting, and open ocean coral dives.",
+    curatedVibe: "Ladakh passes, Rishikesh rapids & Havelock coral reefs",
+    colorTheme: {
+      gradient: "from-cyan-950/40 via-stone-900 to-[#0b0c10]",
+      accent: "text-cyan-300",
+      accentBg: "bg-cyan-500/10",
+      border: "border-cyan-500/30",
+      badge: "bg-cyan-950/60 text-cyan-200 border-cyan-800/40",
+      pillActive: "bg-cyan-600 text-white shadow-cyan-900/40",
+      aura: "rgba(6, 182, 212, 0.12)"
     }
   },
   {
     id: "nostalgic",
     name: "Nostalgic",
+    evocativeTitle: "Timeless & Storied",
     emoji: "🕰️",
-    tagline: "Historic royal capitals, ancient ruins & heritage lanes",
-    description: "Yearning for storied pasts, stone chariot temples, old-world tram lines, grand palaces, and timeless cultural heritage.",
+    tagline: "Centuries-old ruins, royal stone chariots & vintage alleys",
+    description: "Drawn to the echoes of bygone eras: stone architecture, yellow tramcars, heritage stepwells, and ancient empires.",
+    curatedVibe: "Hampi stone temples, Kolkata book lanes & Mysuru royal courtyards",
     colorTheme: {
-      gradient: "from-yellow-700/20 via-amber-800/10 to-orange-700/20",
-      accent: "text-yellow-400",
-      border: "border-yellow-600/40",
-      badge: "bg-yellow-600/10 text-yellow-300 border-yellow-600/30",
-      glow: "shadow-yellow-600/10"
+      gradient: "from-amber-950/50 via-stone-900 to-[#0b0c10]",
+      accent: "text-amber-200",
+      accentBg: "bg-amber-600/10",
+      border: "border-amber-600/30",
+      badge: "bg-amber-950/60 text-amber-200 border-amber-800/40",
+      pillActive: "bg-amber-700 text-white shadow-amber-900/40",
+      aura: "rgba(180, 83, 9, 0.15)"
     }
   },
   {
     id: "reflective",
     name: "Reflective",
+    evocativeTitle: "Misty & Introspective",
     emoji: "🌫️",
-    tagline: "Misty pine forests, quiet monastic hills & silent vistas",
-    description: "Introspective thoughts amidst pine-covered mountain folds, Buddhist prayer wheels, and grand architectural ruins.",
+    tagline: "Solitary mountain outlooks, monastic silence & deep thoughts",
+    description: "Space for quiet thought amidst deodar pine valleys, Buddhist prayer flags fluttering in the breeze, and open horizons.",
+    curatedVibe: "Gangtok monasteries, Darjeeling dawn peaks & Lands End clifftops",
     colorTheme: {
-      gradient: "from-slate-600/20 via-indigo-900/10 to-slate-700/20",
+      gradient: "from-slate-900 via-stone-900 to-[#0b0c10]",
       accent: "text-slate-300",
-      border: "border-slate-500/40",
-      badge: "bg-slate-700/20 text-slate-300 border-slate-600/30",
-      glow: "shadow-slate-500/10"
+      accentBg: "bg-slate-500/10",
+      border: "border-slate-600/30",
+      badge: "bg-slate-900/80 text-slate-200 border-slate-700/40",
+      pillActive: "bg-slate-700 text-white shadow-slate-900/40",
+      aura: "rgba(100, 116, 139, 0.12)"
     }
   },
   {
     id: "nature",
     name: "Nature",
+    evocativeTitle: "Pristine & Wild",
     emoji: "🍃",
-    tagline: "Dense rainforests, living root bridges & roaring falls",
-    description: "Reconnecting with pure wilderness, coffee plantations, cardamom hills, waterfalls, and rich biodiversity reserves.",
+    tagline: "Cardamom rainforests, wildlife reserves & living waterfalls",
+    description: "Immersing in virgin wilderness: dense Western Ghats canopies, elephant corridors, bamboo river rafts, and pure springs.",
+    curatedVibe: "Wayanad spice hills, Coorg rainforests & Shillong living root bridges",
     colorTheme: {
-      gradient: "from-green-600/20 via-emerald-600/10 to-lime-600/20",
-      accent: "text-green-400",
-      border: "border-green-500/40",
-      badge: "bg-green-500/10 text-green-300 border-green-500/30",
-      glow: "shadow-green-500/10"
+      gradient: "from-green-950/40 via-stone-900 to-[#0b0c10]",
+      accent: "text-green-300",
+      accentBg: "bg-green-500/10",
+      border: "border-green-500/30",
+      badge: "bg-green-950/60 text-green-200 border-green-800/40",
+      pillActive: "bg-green-600 text-white shadow-green-900/40",
+      aura: "rgba(34, 197, 94, 0.12)"
     }
   },
   {
     id: "sad",
     name: "Sad",
+    evocativeTitle: "Gentle & Healing",
     emoji: "🌧️",
-    tagline: "Comforting shores, healing hilltops & gentle solitude",
-    description: "When your heart is heavy, seeking gentle compassionate spaces, soothing ocean rhythms, and restorative quiet.",
+    tagline: "Compassionate shores, quiet riverbanks & soothing solitude",
+    description: "When the heart needs healing: seeking gentle waters, quiet mountain corners, and spaces that hold silence with grace.",
+    curatedVibe: "Alappuzha calm backwaters, sacred Varanasi ghats & Varkala ocean waves",
     colorTheme: {
-      gradient: "from-indigo-600/20 via-blue-900/10 to-slate-700/20",
+      gradient: "from-indigo-950/40 via-stone-900 to-[#0b0c10]",
       accent: "text-indigo-300",
-      border: "border-indigo-500/40",
-      badge: "bg-indigo-500/10 text-indigo-300 border-indigo-500/30",
-      glow: "shadow-indigo-500/10"
+      accentBg: "bg-indigo-500/10",
+      border: "border-indigo-500/30",
+      badge: "bg-indigo-950/60 text-indigo-200 border-indigo-800/40",
+      pillActive: "bg-indigo-600 text-white shadow-indigo-900/40",
+      aura: "rgba(99, 102, 241, 0.12)"
     }
   },
   {
     id: "lonely",
     name: "Lonely",
+    evocativeTitle: "Warm & Welcoming",
     emoji: "🕯️",
-    tagline: "Warm communal hubs, welcoming homestays & scenic beauty",
-    description: "Looking for friendly mountain cafés, welcoming local hosts, shared bonfires, and open-hearted travelers.",
+    tagline: "Homely plantation stays, traveler cafés & open-hearted hosts",
+    description: "Seeking connection without pressure: friendly mountain homestays, warm shared chai, and peaceful communal reading nooks.",
+    curatedVibe: "Coorg coffee homestays, Fort Kochi art cafes & Kasol riverside hubs",
     colorTheme: {
-      gradient: "from-stone-600/20 via-amber-900/10 to-orange-800/20",
-      accent: "text-amber-300",
-      border: "border-amber-600/40",
-      badge: "bg-stone-700/20 text-stone-300 border-stone-600/30",
-      glow: "shadow-stone-500/10"
+      gradient: "from-stone-900 via-[#181615] to-[#0b0c10]",
+      accent: "text-stone-300",
+      accentBg: "bg-stone-500/10",
+      border: "border-stone-600/30",
+      badge: "bg-stone-900/80 text-stone-200 border-stone-700/40",
+      pillActive: "bg-stone-700 text-white shadow-stone-900/40",
+      aura: "rgba(168, 162, 158, 0.12)"
     }
   },
   {
     id: "focused",
     name: "Focused",
+    evocativeTitle: "Still & Distraction-Free",
     emoji: "🎯",
-    tagline: "Silent mountain hamlets, calm libraries & digital detox",
-    description: "Deep concentration, creative inspiration, writing, or reading without the noise and rush of modern city life.",
+    tagline: "Mountain retreats, quiet study corners & clean air",
+    description: "For writing, deep study, or creative synthesis: clean mountain silence, wood-panelled rooms, and zero urban chatter.",
+    curatedVibe: "Shimla heritage libraries, Gangtok silent ridges & Araku valley studios",
     colorTheme: {
-      gradient: "from-sky-600/20 via-blue-800/10 to-slate-700/20",
-      accent: "text-sky-400",
-      border: "border-sky-500/40",
-      badge: "bg-sky-500/10 text-sky-300 border-sky-500/30",
-      glow: "shadow-sky-500/10"
+      gradient: "from-sky-950/40 via-stone-900 to-[#0b0c10]",
+      accent: "text-sky-300",
+      accentBg: "bg-sky-500/10",
+      border: "border-sky-500/30",
+      badge: "bg-sky-950/60 text-sky-200 border-sky-800/40",
+      pillActive: "bg-sky-600 text-white shadow-sky-900/40",
+      aura: "rgba(14, 165, 233, 0.12)"
     }
   },
   {
     id: "motivated",
     name: "Motivated",
+    evocativeTitle: "Grand & Awe-Inspiring",
     emoji: "🔥",
-    tagline: "Majestic fortress summits, endless horizons & ambition",
-    description: "Fueling drive and ambition by standing atop formidable desert forts, soaring Himalayan ridgelines, and vast horizons.",
+    tagline: "Formidable hill forts, vast desert horizons & towering summits",
+    description: "Fueling ambition and grit: standing atop ancient cliffside fortifications, gazing across boundless Thar desert sands.",
+    curatedVibe: "Jaisalmer living fort, Amritsar Golden Temple & Hampi royal ruins",
     colorTheme: {
-      gradient: "from-violet-600/20 via-purple-700/10 to-indigo-700/20",
-      accent: "text-violet-400",
-      border: "border-violet-500/40",
-      badge: "bg-violet-500/10 text-violet-300 border-violet-500/30",
-      glow: "shadow-violet-500/10"
+      gradient: "from-purple-950/40 via-stone-900 to-[#0b0c10]",
+      accent: "text-purple-300",
+      accentBg: "bg-purple-500/10",
+      border: "border-purple-500/30",
+      badge: "bg-purple-950/60 text-purple-200 border-purple-800/40",
+      pillActive: "bg-purple-700 text-white shadow-purple-900/40",
+      aura: "rgba(168, 85, 247, 0.12)"
     }
   },
   {
     id: "stressful",
     name: "Stressful / Overwhelmed",
+    evocativeTitle: "Restorative Sanctuary",
     emoji: "🌊",
-    tagline: "Ayurvedic sanctuaries, tranquil backwaters & slow tides",
-    description: "Deep unwinding from sensory overload, gentle Ayurvedic wellness, palm-fringed houseboats, and silent waves.",
+    tagline: "Ayurvedic wellness, gentle backwaters & complete digital detox",
+    description: "Overcoming burnout: warm herbal oils, gentle houseboat drifts, zero screens, and restoring the natural body rhythm.",
+    curatedVibe: "Alappuzha Ayurvedic houseboats, Varkala mineral springs & Coorg silence",
     colorTheme: {
-      gradient: "from-blue-700/20 via-teal-800/10 to-cyan-700/20",
-      accent: "text-cyan-300",
-      border: "border-cyan-500/40",
-      badge: "bg-cyan-600/10 text-cyan-300 border-cyan-600/30",
-      glow: "shadow-cyan-600/10"
+      gradient: "from-blue-950/40 via-stone-900 to-[#0b0c10]",
+      accent: "text-blue-300",
+      accentBg: "bg-blue-500/10",
+      border: "border-blue-500/30",
+      badge: "bg-blue-950/60 text-blue-200 border-blue-800/40",
+      pillActive: "bg-blue-600 text-white shadow-blue-900/40",
+      aura: "rgba(59, 130, 246, 0.12)"
     }
   }
 ];
