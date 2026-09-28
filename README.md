@@ -1,101 +1,65 @@
-# AuraGuide: Mood-Based Places & Soundscapes
+# MoodTrip — Your mood. Your place. Your soundtrack.
 
-> **LOCAL-DATA ACCURACY SAFEGUARD CERTIFIED**  
-> Built with strict adherence to accuracy rules. This application never fabricates local places, fake reviews, fake ratings, fake opening hours, or fake distance claims.
-
----
-
-## 🏛️ Local-Data Accuracy Safeguard Architecture
-
-### 1. Never Fabricate Places (Rule 1)
-- The application never invents place names, restaurants, cafés, tourist attractions, addresses, coordinates, distances, opening/closing times, prices, ratings, reviews, contact information, or availability.
-- Curated recommendations in [`src/data/curatedPlaces.js`](file:///mnt/c/Users/surab/OneDrive/Desktop/Project/src/data/curatedPlaces.js) consist strictly of genuine real-world public landmarks.
-
-### 2. Static Dataset Labeling (Rule 2)
-- All curated records carry `source: "curated"` and `verified: false`.
-- The UI displays a persistent disclaimer banner:
-  > *"Curated recommendations — verify current details before visiting."*
-- Zero fake ratings, zero fake review counts.
-
-### 3. No Fake Distance Calculations (Rule 3)
-- Distance is computed via the spherical Haversine formula in [`src/services/placesService.js`](file:///mnt/c/Users/surab/OneDrive/Desktop/Project/src/services/placesService.js).
-- Distance is rendered **ONLY** when reliable coordinates exist for both the user and the venue. If either coordinate is missing or invalid, distance is omitted cleanly without guessing.
-
-### 4. No Fake Opening Hours (Rule 4)
-- Curated places do not fabricate operational schedules. Users are encouraged to verify live hours directly on official websites or maps.
-
-### 5. City-Level Fallback (Rule 5)
-- If the user enters a city that does not exist in the curated dataset (or enters an empty or misspelled city):
-  - The application displays the exact fallback:
-    > *"We don't have verified local recommendations for this location yet."*
-  - The app then provides mood-based **activity ideas** from [`src/data/activityIdeas.js`](file:///mnt/c/Users/surab/OneDrive/Desktop/Project/src/data/activityIdeas.js) that do not claim to be specific places (e.g. *"Try finding a quiet park, viewpoint, café, or nearby nature spot."*).
-
-### 6. Separation of Recommendations from Facts (Rule 6)
-- Activity concepts are visually and semantically distinguished from factual local venue claims using dedicated `ActivityIdea` trust badges.
-
-### 7. Future API Architecture (Rule 7)
-- Service layer in [`src/services/placesService.js`](file:///mnt/c/Users/surab/OneDrive/Desktop/Project/src/services/placesService.js) distinguishes:
-  - `source: "curated"`
-  - `source: "api"`
-  - `source: "user"`
-- Live API adapters can be registered via `registerPlacesApiProvider()`.
-
-### 8. Source Metadata Schema (Rule 8)
-Each place object implements:
-```javascript
-{
-  id: "...",
-  name: "...",
-  city: "...",
-  type: "...",
-  description: "...",
-  latitude: null, // or valid float
-  longitude: null, // or valid float
-  source: "curated", // or "api" | "user"
-  verified: false // only true when certified by live trusted API
-}
-```
-
-### 9. User Location Privacy (Rule 9)
-- Browser geolocation is requested with a dedicated consent modal explaining why location is needed.
-- Coordinates are stored only in session memory for distance math and are **NEVER** exposed in the UI or persisted to disk.
-- The app operates fully if location permission is declined.
-
-### 10. AI-Generated Content Safeguards (Rule 10)
-- [`src/services/aiSafeguardService.js`](file:///mnt/c/Users/surab/OneDrive/Desktop/Project/src/services/aiSafeguardService.js) implements strict validation that intercepts and blocks AI-generated text containing fake distances, star ratings, review counts, opening hours, or fabricated coordinates.
-
-### 11. UI Trust Indicators (Rule 11)
-- Cards display explicit badges:
-  - `Curated` (with tooltip explaining it is not a live feed)
-  - `Verified Source` (for official API sources)
-  - `Activity Idea` (for generic recommendations)
-
-### 12. Rule 12 Development Test Cases
-Both in-app and automated tests verify all 8 edge cases:
-1. **Known city + known dataset** (e.g., New York, peaceful)
-2. **Unknown city** (e.g., Atlantis)
-3. **Empty city** (`""`)
-4. **Misspelled city** (e.g., `Nw Yrk`)
-5. **Geolocation denied**
-6. **Geolocation unavailable**
-7. **No places available for a mood**
-8. **No songs available for a language/mood combination**
+> **INDIA-FIRST MOOD TRAVEL & MUSIC DISCOVERY PLATFORM**  
+> Built with strict adherence to local-data accuracy safeguards. Zero fabricated places, zero fake ratings, zero fake reviews, and zero fake opening hours.
 
 ---
 
-## 🚀 Running the Project
+## 🇮🇳 Product Vision
+MoodTrip answers one fundamental emotional question:
+> **"Based on my mood, where should I go in India, and what Indian music should I listen to?"**
 
-### Development Server
+### Core Pillars
+1. **100% India-First & India-Only**:
+   - Covers popular destinations across South, North, West, East, and Northeast India: Vijayawada, Visakhapatnam, Araku Valley, Tirupati, Hyderabad, Hampi, Bengaluru, Mysuru, Coorg, Chennai, Ooty, Madurai, Pondicherry, Munnar, Alappuzha, Kochi, Wayanad, Varkala, Goa, Mumbai, Udaipur, Jaipur, Jaisalmer, Varanasi, Rishikesh, Manali, Shimla, Leh/Ladakh, Srinagar, Amritsar, Delhi, Agra, Kolkata, Darjeeling, Puri, Shillong, Gangtok, and Andaman Islands.
+   - Absolutely zero foreign destinations in normal application data or presets.
+2. **15 Mood Dimensions**:
+   - Happy, Peaceful, Romantic, Relaxed, Energetic, Adventurous, Spiritual, Nostalgic, Reflective, Nature, Sad, Lonely, Focused, Motivated, and Stressful/Overwhelmed.
+   - Distinct atmospheric personality, color gradients, and tailored Indian travel recommendations.
+3. **Multi-Language Indian Music System**:
+   - Extensive coverage of **Telugu**, Hindi, Tamil, Kannada, Malayalam, Bengali, Marathi, Gujarati, Punjabi, Odia, Assamese, Urdu, plus "All Indian Languages".
+   - Verified track catalog with authentic titles, artists, and release years.
+4. **Verified Spotify Integration**:
+   - Automatic recommendation of curated editorial Spotify playlists for mood + language combinations (e.g. Telugu Romantic, Malayalam Peaceful, Punjabi Energetic, Hindi Happy).
+   - If an official playlist is not verified in the dataset, the platform generates a legitimate Spotify search URL labeled honestly as **"Search Spotify"** rather than fabricating an ID.
+5. **Top Places in India (Mood-Independent Explorer)**:
+   - Discover destinations by category: Popular Destination, Beach, Hill Station, Nature Escape, Heritage, Spiritual, Adventure, Culture, Food, Island, Wildlife, and City Experience.
+   - No artificial or misleading "No. 1 / No. 2" rankings.
+6. **Strict Accuracy Safeguards**:
+   - Spherical Haversine distance calculations computed **only** when reliable coordinates exist for both user and venue.
+   - Unsupported Indian cities return transparent fallback:
+     > *"We don't have verified local recommendations for this location yet."*
+     Accompanied by mood-based Indian activity ideas and Pan-India travel recommendations.
+   - Ephemeral, privacy-first geolocation (never persisted or displayed as raw coordinates).
+
+---
+
+## 🛠️ Technology Stack
+- **Framework**: React 19 + Vite
+- **Styling**: Tailwind CSS v4 + Plus Jakarta Sans & JetBrains Mono typography
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Testing**: Vitest (15 automated safeguard & edge-case test suites)
+
+---
+
+## 🚀 Getting Started
+
+From `C:\Users\surab\OneDrive\Desktop\Project`:
+
 ```bash
+# 1. Install dependencies
+npm install
+
+# 2. Run local development server
 npm run dev
-```
 
-### Run Automated Vitest Test Suite
-```bash
+# 3. Run automated safeguard test suite
 npm test
-```
 
-### Production Build
-```bash
+# 4. Build for production
 npm run build
+
+# 5. Preview production build
+npm run preview
 ```

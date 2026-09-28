@@ -1,13 +1,13 @@
 /**
- * Geolocation Service Layer
+ * MoodTrip - Geolocation Service Layer
  * 
- * SAFEGUARD COMPLIANCE:
+ * SAFEGUARD & PRIVACY COMPLIANCE:
  * - Rule 9: User Location Privacy
- *   - Explains why location is requested.
+ *   - Clear consent explanation.
  *   - Ephemeral in-memory usage only; no persistent tracking.
- *   - NEVER exposes raw coordinates in the UI.
+ *   - Coordinates are NEVER displayed in the UI.
  *   - Graceful fallback when denied or unavailable.
- * - Rule 12: Tested for "Geolocation denied" and "Geolocation unavailable".
+ * - INDIA-FOCUSED simulation helpers for automated tests.
  */
 
 export const LOCATION_STATUS = {
@@ -21,15 +21,13 @@ export const LOCATION_STATUS = {
 
 /**
  * Requests browser geolocation with explicit user consent and privacy protection.
- * 
- * @returns {Promise<{ status: string, coords: { latitude: number, longitude: number } | null, message: string }>}
  */
 export async function requestBrowserGeolocation() {
   if (typeof window === 'undefined' || !navigator || !navigator.geolocation) {
     return {
       status: LOCATION_STATUS.UNAVAILABLE,
       coords: null,
-      message: "Browser geolocation is not supported in this environment. Recommendations will display without distances."
+      message: "Browser location is not supported in this environment. Recommendations will display without distances."
     };
   }
 
@@ -48,7 +46,7 @@ export async function requestBrowserGeolocation() {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           },
-          message: "Location acquired for distance calculations. Coordinates are kept strictly in memory for this session and never logged or stored."
+          message: "Location acquired for distance calculations. Coordinates are kept strictly in session memory and never stored or shared."
         });
       },
       (error) => {
@@ -78,7 +76,7 @@ export async function requestBrowserGeolocation() {
 }
 
 /**
- * Simulation helpers for Edge Case Testing (Rule 12)
+ * Indian Location Simulation helpers for testing (Rule 12)
  */
 export function getSimulatedLocationState(scenario) {
   switch (scenario) {
@@ -86,33 +84,43 @@ export function getSimulatedLocationState(scenario) {
       return {
         status: LOCATION_STATUS.DENIED,
         coords: null,
-        message: "[Simulated Test] Location access denied by user. Distances omitted cleanly."
+        message: "[Test] Location access denied. Distances omitted cleanly."
       };
     case 'unavailable':
       return {
         status: LOCATION_STATUS.UNAVAILABLE,
         coords: null,
-        message: "[Simulated Test] GPS / Geolocation sensor unavailable. Distances omitted cleanly."
+        message: "[Test] GPS sensor unavailable. Distances omitted cleanly."
       };
-    case 'nyc':
-      // Times Square coords for testing distance calculation against NYC landmarks
+    case 'vijayawada':
       return {
         status: LOCATION_STATUS.SIMULATED,
-        coords: { latitude: 40.7580, longitude: -73.9855 },
-        message: "[Simulated Test] Simulated user position near Midtown Manhattan (40.758, -73.985)."
+        coords: { latitude: 16.5062, longitude: 80.6480 },
+        message: "Position simulated near Vijayawada, Andhra Pradesh (16.506° N, 80.648° E)."
       };
-    case 'london':
-      // Trafalgar Square coords for testing distance against London landmarks
+    case 'hyderabad':
       return {
         status: LOCATION_STATUS.SIMULATED,
-        coords: { latitude: 51.5080, longitude: -0.1281 },
-        message: "[Simulated Test] Simulated user position near Trafalgar Square (51.508, -0.128)."
+        coords: { latitude: 17.3850, longitude: 78.4867 },
+        message: "Position simulated near Hyderabad, Telangana (17.385° N, 78.486° E)."
+      };
+    case 'visakhapatnam':
+      return {
+        status: LOCATION_STATUS.SIMULATED,
+        coords: { latitude: 17.6868, longitude: 83.2185 },
+        message: "Position simulated near Visakhapatnam, Andhra Pradesh (17.686° N, 83.218° E)."
+      };
+    case 'bengaluru':
+      return {
+        status: LOCATION_STATUS.SIMULATED,
+        coords: { latitude: 12.9716, longitude: 77.5946 },
+        message: "Position simulated near Bengaluru, Karnataka (12.971° N, 77.594° E)."
       };
     default:
       return {
         status: LOCATION_STATUS.IDLE,
         coords: null,
-        message: "No location requested."
+        message: "No location active."
       };
   }
 }

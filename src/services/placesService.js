@@ -1,26 +1,23 @@
 /**
- * Places Service Layer
+ * MoodTrip - Places Service Layer
  * 
- * SAFEGUARD COMPLIANCE:
- * - Rule 1: Never fabricate places, names, coords, distances, hours, or ratings.
- * - Rule 2: Label static recommendations with source: "curated" and verified: false.
- * - Rule 3: Compute distances ONLY if reliable coordinates exist for both user and venue.
- * - Rule 5: Fallback on unknown/misspelled/empty cities:
- *           "We don't have verified local recommendations for this location yet."
- *           + mood-based generic activity ideas.
- * - Rule 7: Strict architectural separation between "curated", "api", and "user" sources.
- * - Rule 8: Schema conformity for source metadata.
+ * SAFEGUARD & INDIA-FIRST COMPLIANCE:
+ * - INDIA-ONLY: Travel recommendations strictly located in India.
+ * - Rule 1: Never fabricate destinations, addresses, ratings, hours, or distances.
+ * - Rule 2: Label curated records with source: "curated", verified: false.
+ * - Rule 3: Compute Haversine distance ONLY when valid coordinates exist for both locations.
+ * - Rule 5: If an Indian city is unsupported:
+ *           "We don't have verified local recommendations for this city yet"
+ *           + generic Indian mood activity ideas + Pan-India recommendations for that mood.
+ * - Rule 7: Architectural separation between "curated", "api", and "user" sources.
  */
 
-import { CURATED_PLACES, getAvailableCuratedCities } from '../data/curatedPlaces';
-import { getActivityIdeasForMood } from '../data/activityIdeas';
+import { INDIAN_DESTINATIONS } from '../data/indianDestinations';
+import { getIndianActivitiesForMood } from '../data/indianActivities';
 
 /**
- * Calculates Haversine spherical distance between two coordinates in kilometers.
- * 
- * SAFEGUARD (Rule 3):
- * If either latitude or longitude is null, undefined, NaN, or out of range,
- * this function strictly returns null. Distance is NEVER guessed.
+ * Calculates spherical Haversine distance in kilometers.
+ * Strictly returns null if any coordinate is missing, null, undefined, NaN, or out of range.
  */
 export function calculateHaversineDistanceKm(lat1, lon1, lat2, lon2) {
   if (
@@ -41,7 +38,6 @@ export function calculateHaversineDistanceKm(lat1, lon1, lat2, lon2) {
     return null;
   }
 
-  // Bounds validation: Lat [-90, 90], Lon [-180, 180]
   if (
     nLat1 < -90 || nLat1 > 90 ||
     nLat2 < -90 || nLat2 > 90 ||
@@ -52,7 +48,7 @@ export function calculateHaversineDistanceKm(lat1, lon1, lat2, lon2) {
   }
 
   const toRad = (deg) => (deg * Math.PI) / 180;
-  const R = 6371; // Earth radius in km
+  const R = 6371; // Earth's mean radius in km
 
   const dLat = toRad(nLat2 - nLat1);
   const dLon = toRad(nLon2 - nLon1);
@@ -65,13 +61,11 @@ export function calculateHaversineDistanceKm(lat1, lon1, lat2, lon2) {
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   const distance = R * c;
 
-  // Format cleanly to 1 decimal place
   return Math.round(distance * 10) / 10;
 }
 
 // Registry for future live API adapters (Rule 7)
 const registeredApiProviders = [];
-
 export function registerPlacesApiProvider(provider) {
   if (provider && typeof provider.fetchPlaces === 'function') {
     registeredApiProviders.push(provider);
@@ -79,156 +73,186 @@ export function registerPlacesApiProvider(provider) {
 }
 
 /**
- * Normalizes city string for exact or canonical case comparison.
+ * Finds an Indian destination by city/destination name in the dataset
  */
-export function normalizeCityName(cityName) {
-  if (!cityName || typeof cityName !== 'string') return '';
-  return cityName.trim().toLowerCase();
+export function findIndianDestinationByName(cityName) {
+  if (!cityName || typeof cityName !== 'string') return null;
+  const norm = cityName.trim().toLowerCase();
+  if (!norm) return null;
+
+  return INDIAN_DESTINATIONS.find(d => {
+    const nameMatch = d.name.toLowerCase() === norm || d.name.toLowerCase().includes(norm);
+    const idMatch = d.id === norm;
+    return nameMatch || idMatch;
+  }) || null;
 }
 
 /**
- * Finds matching curated city if it exists in local dataset.
- * Does NOT perform fuzzy auto-guessing that would fabricate a match for unknown cities.
+ * Enriches destination objects with distance calculations and schema validation.
  */
-export function resolveCuratedCity(cityName) {
-  const normInput = normalizeCityName(cityName);
-  if (!normInput) return null;
+function enrichDestination(dest, userCoords, currentMood) {
+  const whyReason = dest.whyItMatches && dest.whyItMatches[currentMood]
+    ? dest.whyItMatches[currentMood]
+    : dest.shortDescription;
 
-  const availableCities = getAvailableCuratedCities();
-  for (const city of availableCities) {
-    if (city.toLowerCase() === normInput) {
-      return city;
-    }
+  const item = {
+    id: dest.id,
+    name: dest.name,
+    state: dest.state,
+    region: dest.region,
+    category: dest.category,
+    description: dest.shortDescription,
+    whyItMatchesMood: whyReason,
+    activities: dest.activities || [],
+    latitude: typeof dest.latitude === 'number' ? dest.latitude : null,
+    longitude: typeof dest.longitude === 'number' ? dest.longitude : null,
+    source: dest.source || 'curated',
+    verified: Boolean(dest.verified),
+    imageUrl: dest.imageUrl,
+    distanceKm: null
+  };
+
+  if (
+    userCoords &&
+    typeof userCoords.latitude === 'number' &&
+    typeof userCoords.longitude === 'number' &&
+    item.latitude !== null &&
+    item.longitude !== null
+  ) {
+    item.distanceKm = calculateHaversineDistanceKm(
+      userCoords.latitude,
+      userCoords.longitude,
+      item.latitude,
+      item.longitude
+    );
   }
-  return null;
+
+  return item;
 }
 
 /**
- * Query places with full safeguard enforcement.
+ * Get Indian destinations matching the user's mood.
  * 
- * @param {Object} options
- * @param {string} options.city - Target city name entered by user
- * @param {string} options.mood - User's selected mood
- * @param {Object|null} options.userCoords - Optional { latitude, longitude }
- * @param {string|null} options.sourceFilter - Optional "curated" | "api" | "all"
- * @returns {Promise<Object>} Recommendation response object
+ * @param {Object} params
+ * @param {string} params.mood - Current user mood
+ * @param {string} params.userCity - User-entered Indian city/location
+ * @param {Object|null} params.userCoords - Optional { latitude, longitude }
+ * @returns {Promise<Object>} Recommendation response
  */
-export async function getPlaces({
-  city = '',
-  mood = '',
-  userCoords = null,
-  sourceFilter = 'all'
+export async function getPlacesByMood({
+  mood = 'peaceful',
+  userCity = '',
+  userCoords = null
 } = {}) {
-  const trimmedCity = (city || '').trim();
-  const normalizedMood = (mood || '').trim().toLowerCase();
+  const normMood = (mood || 'peaceful').toLowerCase().trim();
+  const trimmedCity = (userCity || '').trim();
 
-  // Edge Case 1: Empty city (Rule 12)
-  if (!trimmedCity) {
-    return {
-      places: [],
-      city: '',
-      fallbackRequired: true,
-      fallbackType: 'empty_city',
-      fallbackMessage: "We don't have verified local recommendations for this location yet.",
-      subMessage: "Please provide a city name to check for curated local recommendations.",
-      activityIdeas: getActivityIdeasForMood(normalizedMood),
-      source: null
-    };
-  }
-
-  // Check if city exists in the curated static database
-  const matchedCity = resolveCuratedCity(trimmedCity);
-
-  // Edge Case 2 & 4: Unknown city or Misspelled city (Rule 5 & 12)
-  // NEVER fabricate places for a city not in our verified/curated dataset!
-  if (!matchedCity) {
-    return {
-      places: [],
-      city: trimmedCity,
-      fallbackRequired: true,
-      fallbackType: 'unknown_city',
-      // Exact prompt required phrasing:
-      fallbackMessage: "We don't have verified local recommendations for this location yet.",
-      subMessage: `We currently do not hold a curated or verified place registry for "${trimmedCity}". Rather than presenting invented venues, explore these mood-aligned activity ideas:`,
-      activityIdeas: getActivityIdeasForMood(normalizedMood),
-      source: null
-    };
-  }
-
-  // Filter curated places for the matched city
-  let filteredPlaces = CURATED_PLACES.filter(place => {
-    return place.city.toLowerCase() === matchedCity.toLowerCase();
+  // 1. Filter all Indian destinations that suit this mood
+  const moodMatched = INDIAN_DESTINATIONS.filter(dest => {
+    return dest.moods && dest.moods.map(m => m.toLowerCase()).includes(normMood);
   });
 
-  // Filter by mood if provided
-  if (normalizedMood) {
-    filteredPlaces = filteredPlaces.filter(place => {
-      return place.moods && place.moods.map(m => m.toLowerCase()).includes(normalizedMood);
-    });
+  const enrichedMoodPlaces = moodMatched.map(d => enrichDestination(d, userCoords, normMood));
+
+  // If user entered a city, check whether it is in our verified/curated dataset
+  let localDestination = null;
+  let isUnsupportedCity = false;
+
+  if (trimmedCity) {
+    localDestination = findIndianDestinationByName(trimmedCity);
+    if (!localDestination) {
+      isUnsupportedCity = true;
+    }
   }
 
-  // Filter by source if specified (Rule 7)
-  if (sourceFilter && sourceFilter !== 'all') {
-    filteredPlaces = filteredPlaces.filter(place => place.source === sourceFilter);
-  }
-
-  // Edge Case 7: No places available for a specific mood in a known city (Rule 12)
-  if (filteredPlaces.length === 0) {
+  // Handle Unsupported City (Rule 5 compliance)
+  if (isUnsupportedCity) {
     return {
-      places: [],
-      city: matchedCity,
+      places: enrichedMoodPlaces, // Show relevant Pan-India places so user can discover travel ideas
+      localPlaces: [],
+      userCity: trimmedCity,
       fallbackRequired: true,
-      fallbackType: 'no_places_for_mood',
-      fallbackMessage: `No curated places currently match the mood "${mood}" in ${matchedCity}.`,
-      subMessage: "We don't invent venues to fill the list. Here are general activity ideas suited for your mood:",
-      activityIdeas: getActivityIdeasForMood(normalizedMood),
+      fallbackMessage: "We don't have verified local recommendations for this location yet.",
+      subMessage: `We don't currently have a verified local registry for "${trimmedCity}". Rather than fabricating fictional venues, explore these mood-aligned activity ideas and travel destinations across India:`,
+      activityIdeas: getIndianActivitiesForMood(normMood),
       source: 'curated'
     };
   }
 
-  // Enrich places with verified distance calculation ONLY IF coordinates exist for both
-  const enrichedPlaces = filteredPlaces.map(place => {
-    // Validate schema compliance (Rule 8)
-    const placeObject = {
-      id: place.id,
-      name: place.name,
-      city: place.city,
-      type: place.type,
-      description: place.description,
-      latitude: typeof place.latitude === 'number' ? place.latitude : null,
-      longitude: typeof place.longitude === 'number' ? place.longitude : null,
-      source: place.source || 'curated',
-      verified: Boolean(place.verified), // Rule 8: false unless officially verified
-      notes: place.notes || null,
-      // Rule 3: distanceKm is computed ONLY if valid coordinates exist for both
-      distanceKm: null
-    };
+  // If known city was entered, prioritize it or show nearby
+  let sortedPlaces = [...enrichedMoodPlaces];
+  if (localDestination) {
+    // Bring local destination to top if it matches mood
+    const localEnriched = enrichDestination(localDestination, userCoords, normMood);
+    sortedPlaces = sortedPlaces.filter(p => p.id !== localDestination.id);
+    sortedPlaces.unshift(localEnriched);
+  }
 
-    if (
-      userCoords &&
-      typeof userCoords.latitude === 'number' &&
-      typeof userCoords.longitude === 'number' &&
-      placeObject.latitude !== null &&
-      placeObject.longitude !== null
-    ) {
-      placeObject.distanceKm = calculateHaversineDistanceKm(
-        userCoords.latitude,
-        userCoords.longitude,
-        placeObject.latitude,
-        placeObject.longitude
-      );
-    }
-
-    return placeObject;
-  });
+  // If distance is available, sort nearest first
+  if (userCoords) {
+    sortedPlaces.sort((a, b) => {
+      if (a.distanceKm !== null && b.distanceKm !== null) {
+        return a.distanceKm - b.distanceKm;
+      }
+      return 0;
+    });
+  }
 
   return {
-    places: enrichedPlaces,
-    city: matchedCity,
+    places: sortedPlaces,
+    localPlaces: localDestination ? [enrichDestination(localDestination, userCoords, normMood)] : [],
+    userCity: trimmedCity,
     fallbackRequired: false,
-    fallbackType: null,
     fallbackMessage: null,
-    activityIdeas: [],
+    subMessage: null,
+    activityIdeas: getIndianActivitiesForMood(normMood),
     source: 'curated'
+  };
+}
+
+/**
+ * Top Places in India Explorer (Independent of mood)
+ * Organizes authentic Indian destinations by category without false rankings.
+ */
+export function getTopPlacesInIndia({ category = 'all', searchQuery = '' } = {}) {
+  let list = [...INDIAN_DESTINATIONS];
+
+  if (category && category !== 'all') {
+    list = list.filter(d => d.category.toLowerCase() === category.toLowerCase());
+  }
+
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase().trim();
+    list = list.filter(d =>
+      d.name.toLowerCase().includes(q) ||
+      d.state.toLowerCase().includes(q) ||
+      d.category.toLowerCase().includes(q)
+    );
+  }
+
+  return list.map(d => ({
+    id: d.id,
+    name: d.name,
+    state: d.state,
+    region: d.region,
+    category: d.category,
+    description: d.shortDescription,
+    activities: d.activities || [],
+    imageUrl: d.imageUrl,
+    source: 'curated',
+    verified: false
+  }));
+}
+
+// Retain alias for backward compatibility with existing tests
+export async function getPlaces(options) {
+  const res = await getPlacesByMood({
+    mood: options.mood,
+    userCity: options.city,
+    userCoords: options.userCoords
+  });
+  return {
+    ...res,
+    city: options.city
   };
 }
