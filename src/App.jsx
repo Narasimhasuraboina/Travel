@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Compass,
   MapPin,
@@ -10,7 +10,6 @@ import {
   AlertCircle,
   Lightbulb,
   ExternalLink,
-  ChevronDown,
   Dices
 } from 'lucide-react';
 
@@ -166,10 +165,10 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0c10] text-[#e8e9ed] flex flex-col selection:bg-amber-500/30 selection:text-amber-200 relative overflow-x-hidden">
-      {/* Dynamic warm mood atmospheric lighting in background */}
+    <div className="min-h-screen bg-[#08090c] text-[#e2e4e9] flex flex-col selection:bg-amber-400/20 selection:text-amber-200 relative overflow-x-hidden">
+      {/* Subtle, restrained ambient lighting */}
       <div
-        className="fixed top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[700px] pointer-events-none transition-all duration-1000 -z-10 blur-3xl opacity-25"
+        className="fixed top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[600px] pointer-events-none transition-all duration-1000 -z-10 blur-3xl opacity-20"
         style={{
           background: `radial-gradient(ellipse at 50% 0%, ${currentMood.colorTheme.aura}, transparent 70%)`
         }}
@@ -186,11 +185,11 @@ export default function App() {
         {/* EDITORIAL HERO SECTION */}
         <section ref={moodPickerRef} className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-slate-300 text-xs font-mono uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-slate-400 text-[10px] font-mono uppercase tracking-widest mb-4">
               <span>Curated Indian Travel & Soundtracks</span>
             </div>
 
@@ -199,30 +198,30 @@ export default function App() {
             </h1>
 
             <p className="mt-4 text-sm sm:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed font-light">
-              From the misty tea gardens of Munnar to the golden ghats of Varanasi. Select how you feel right now, and let us reveal the Indian sanctuary and soundtrack attuned to your spirit.
+              From the misty tea gardens of Munnar to the sacred ghats of Varanasi. Select your emotional state, and discover the Indian sanctuary and authentic soundtrack attuned to your spirit.
             </p>
           </motion.div>
         </section>
 
-        {/* MOOD SELECTION SECTION */}
+        {/* STEP 1: MOOD SELECTION */}
         <section className="mb-14">
           <div className="flex items-center justify-between mb-4 pb-2 border-b border-white/[0.06]">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest">
+              <span className="font-mono text-xs font-semibold text-amber-300 uppercase tracking-widest">
                 STEP 01
               </span>
-              <span className="text-slate-500">•</span>
+              <span className="text-slate-600">•</span>
               <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                Choose an emotional state (15 Moods)
+                Select an emotional state (15 Moods)
               </h2>
             </div>
 
             <button
               type="button"
               onClick={handleSurpriseMe}
-              className="text-xs text-amber-400/90 hover:text-amber-300 font-medium inline-flex items-center gap-1.5 cursor-pointer transition-colors"
+              className="text-xs text-amber-300 hover:text-amber-200 font-medium inline-flex items-center gap-1.5 cursor-pointer transition-colors"
             >
-              <Dices className="w-3.5 h-3.5 text-amber-400" />
+              <Dices className="w-3.5 h-3.5" />
               <span>Surprise Me</span>
             </button>
           </div>
@@ -239,13 +238,13 @@ export default function App() {
           </div>
         </section>
 
-        {/* WHERE ARE YOU? (DEPARTURE / LOCATION SECTION) */}
+        {/* STEP 2: WHERE ARE YOU? (DEPARTURE LOCATION) */}
         <section className="mb-14">
           <div className="flex items-center gap-2 mb-3 pb-1">
-            <span className="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest">
+            <span className="font-mono text-xs font-semibold text-amber-300 uppercase tracking-widest">
               STEP 02
             </span>
-            <span className="text-slate-500">•</span>
+            <span className="text-slate-600">•</span>
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">
               Your Indian Departure Location
             </span>
@@ -262,18 +261,18 @@ export default function App() {
 
         {/* RECOMMENDATION RESULTS CONTAINER */}
         <div ref={resultsRef} className="pt-2 scroll-mt-20">
-          {/* Active Mood Editorial Header Banner */}
-          <div className="p-5 sm:p-6 rounded-3xl bg-[#111319] border border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 shadow-xl relative overflow-hidden">
+          {/* Active Mood Pill Banner */}
+          <div className="p-5 sm:p-6 rounded-2xl bg-[#0f1015] border border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 shadow-lg">
             <div className="flex items-start sm:items-center gap-4">
-              <span className="text-4xl filter drop-shadow select-none mt-1 sm:mt-0">
+              <span className="text-3xl sm:text-4xl filter drop-shadow select-none mt-1 sm:mt-0">
                 {currentMood.emoji}
               </span>
               <div>
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
-                    Active Resonance
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500">
+                    Active State
                   </span>
-                  <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${currentMood.colorTheme.badge}`}>
+                  <span className="text-[10px] font-mono font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-white/[0.04] text-amber-200 border border-amber-400/30">
                     {currentMood.name}
                   </span>
                 </div>
@@ -289,7 +288,7 @@ export default function App() {
             <button
               type="button"
               onClick={handleChangeMood}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-slate-300 hover:text-white text-xs font-semibold border border-white/10 transition-colors cursor-pointer shrink-0 self-start sm:self-auto"
+              className="inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white text-xs font-medium border border-white/10 transition-colors cursor-pointer shrink-0 self-start sm:self-auto"
             >
               <RotateCcw className="w-3.5 h-3.5 text-slate-400" />
               Change Mood
@@ -298,9 +297,9 @@ export default function App() {
 
           {/* UNSUPPORTED INDIAN CITY NOTICE (Rule 5 compliance) */}
           {placesData.fallbackRequired && (
-            <div className="mb-10 p-5 rounded-2xl bg-[#1c1611] border border-amber-500/30 text-amber-200">
+            <div className="mb-10 p-5 rounded-2xl bg-[#14120e] border border-amber-500/25 text-amber-200">
               <div className="flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                <AlertCircle className="w-5 h-5 text-amber-300 shrink-0 mt-0.5" />
                 <div>
                   <h4 className="font-serif text-lg font-bold text-amber-100">
                     {placesData.fallbackMessage}
@@ -315,16 +314,16 @@ export default function App() {
 
           {/* SECTION 1: PLACES THAT MATCH YOUR MOOD */}
           <section id="places-section" className="mb-16">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-white/[0.08] pb-4 mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-white/[0.06] pb-4 mb-4">
               <div>
-                <span className="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest block mb-1">
+                <span className="font-mono text-[10px] font-bold text-amber-300 uppercase tracking-widest block mb-1">
                   DESTINATION DOSSIER
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight">
                   Places that match your mood
                 </h3>
               </div>
-              <span className="text-xs text-slate-400 font-mono">
+              <span className="text-xs text-slate-500 font-mono">
                 {placesData.places.length} Curated Indian Destinations
               </span>
             </div>
@@ -346,16 +345,16 @@ export default function App() {
 
           {/* SECTION 2: THINGS YOU COULD DO */}
           <section className="mb-16">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-white/[0.08] pb-4 mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-white/[0.06] pb-4 mb-6">
               <div>
-                <span className="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest block mb-1">
+                <span className="font-mono text-[10px] font-bold text-amber-300 uppercase tracking-widest block mb-1">
                   EXPERIENTIAL GUIDANCE
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight">
                   Things you could do
                 </h3>
               </div>
-              <span className="text-xs text-slate-400 font-light">
+              <span className="text-xs text-slate-500 font-light">
                 Mood-aligned ideas for the road or at home
               </span>
             </div>
@@ -369,37 +368,37 @@ export default function App() {
 
           {/* SECTION 3: YOUR SOUNDTRACK */}
           <section ref={musicRef} className="mb-20">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-white/[0.08] pb-4 mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-white/[0.06] pb-4 mb-6">
               <div>
-                <span className="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest block mb-1">
+                <span className="font-mono text-[10px] font-bold text-amber-300 uppercase tracking-widest block mb-1">
                   SONIC COMPANION
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight">
                   Your soundtrack
                 </h3>
               </div>
-              <span className="text-xs text-slate-400 font-mono">
+              <span className="text-xs text-slate-500 font-mono">
                 {selectedLanguage} • {musicData.songs.length} Tracks
               </span>
             </div>
 
-            {/* Horizontally scrollable Indian Language Filter Tabs */}
-            <div className="mb-8">
+            {/* Indian Language Filter Tabs */}
+            <div className="mb-7">
               <LanguageFilter
                 selectedLanguage={selectedLanguage}
                 onSelectLanguage={setSelectedLanguage}
               />
             </div>
 
-            {/* Featured Spotify Recommendation Card (Vinyl Studio Experience) */}
+            {/* Featured Spotify Recommendation Card */}
             <div className="mb-8">
               <SpotifyPlaylistCard recommendation={spotifyRec} />
             </div>
 
-            {/* Honest Fallback if no songs match (Rule 12) */}
+            {/* Empty state when no songs match combination (Rule 12) */}
             {musicData.fallbackRequired && (
-              <div className="p-6 rounded-2xl bg-[#14161f] border border-violet-500/30 text-violet-200 space-y-3">
-                <h4 className="font-serif text-base font-bold text-violet-100">
+              <div className="p-6 rounded-2xl bg-[#0f1015] border border-white/10 text-slate-200 space-y-3">
+                <h4 className="font-serif text-base font-bold text-white">
                   {musicData.fallbackMessage}
                 </h4>
                 <p className="text-xs text-slate-400 font-light">
@@ -408,7 +407,7 @@ export default function App() {
                 <button
                   type="button"
                   onClick={() => setSelectedLanguage('All Indian Languages')}
-                  className="text-xs font-semibold px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-white transition-colors cursor-pointer"
+                  className="text-xs font-semibold px-4 py-2 rounded-lg bg-white/[0.06] hover:bg-white/[0.1] text-white transition-colors cursor-pointer border border-white/10"
                 >
                   Explore All Indian Languages
                 </button>
@@ -425,17 +424,17 @@ export default function App() {
             )}
           </section>
 
-          {/* THE INDIA COLLECTION (Category-Based Explorer) */}
+          {/* THE INDIA COLLECTION */}
           <TopPlacesSection />
         </div>
       </main>
 
-      {/* EDITORIAL FOOTER */}
-      <footer className="mt-24 border-t border-white/[0.08] bg-[#08090c] py-12 text-center text-xs text-slate-500">
+      {/* FOOTER */}
+      <footer className="mt-24 border-t border-white/[0.06] bg-[#06070a] py-12 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 space-y-4">
           <div className="flex items-center justify-center gap-2">
             <span className="font-serif text-lg font-bold text-slate-200">MoodTrip</span>
-            <span className="text-slate-600">•</span>
+            <span className="text-slate-700">•</span>
             <span className="text-slate-400 font-light italic">Your mood. Your place. Your soundtrack.</span>
           </div>
           <p className="text-xs max-w-xl mx-auto text-slate-500 leading-relaxed font-light">

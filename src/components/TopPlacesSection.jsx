@@ -16,35 +16,35 @@ export default function TopPlacesSection() {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <section id="top-places-section" className="mt-20 pt-16 border-t border-white/[0.08]">
+    <section id="top-places-section" className="mt-20 pt-16 border-t border-white/[0.06]">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-slate-300 text-xs font-mono mb-2">
-            <Compass className="w-3.5 h-3.5 text-amber-400" />
-            <span>THE INDIA COLLECTION</span>
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-white/[0.04] border border-white/[0.08] text-slate-300 text-[10px] font-mono tracking-widest uppercase mb-2">
+            <Compass className="w-3.5 h-3.5 text-amber-300" />
+            <span>The India Collection</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight">
             Top Places in India
           </h2>
-          <p className="text-sm text-slate-400 mt-1 max-w-xl font-light">
+          <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl font-light leading-relaxed">
             A curated index of celebrated Indian destinations across regions, organized by landscape and character without artificial rankings.
           </p>
         </div>
 
-        {/* Search input */}
+        {/* Search */}
         <div className="w-full md:w-72 relative">
-          <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-3.5 h-3.5 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search state, place or region..."
-            className="w-full bg-[#111319] border border-white/10 focus:border-amber-400/60 rounded-xl pl-10 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+            className="w-full bg-[#0f1015] border border-white/10 focus:border-amber-400/50 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
           />
         </div>
       </div>
 
-      {/* Category Filter Pills */}
+      {/* Category Pills */}
       <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-6 scrollbar-none no-scrollbar">
         {DESTINATION_CATEGORIES.map((cat) => {
           const isSelected = selectedCategory.toLowerCase() === cat.id.toLowerCase();
@@ -53,10 +53,10 @@ export default function TopPlacesSection() {
               key={cat.id}
               type="button"
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+              className={`px-3.5 py-1.5 rounded-full text-xs transition-all duration-150 cursor-pointer flex items-center gap-1.5 ${
                 isSelected
-                  ? 'bg-amber-400 text-slate-950 font-bold shadow-md shadow-amber-500/20'
-                  : 'bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/[0.06]'
+                  ? 'bg-white text-black font-bold shadow-sm'
+                  : 'bg-white/[0.03] hover:bg-white/[0.07] text-slate-300 border border-white/[0.06]'
               }`}
             >
               <span>{cat.icon}</span>
@@ -73,26 +73,26 @@ export default function TopPlacesSection() {
           return (
             <article
               key={dest.id}
-              className="group bg-[#111319] border border-white/[0.08] hover:border-white/20 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-lg flex flex-col justify-between"
+              className="group bg-[#0f1015] border border-white/[0.07] hover:border-white/[0.18] rounded-2xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between"
             >
-              <div className="relative h-48 w-full overflow-hidden bg-slate-950">
+              <div className="relative h-48 w-full overflow-hidden bg-[#0a0b0e]">
                 <img
                   src={dest.imageUrl}
                   alt={`${dest.name}, ${dest.state}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-95"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111319] via-[#111319]/20 to-black/20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0f1015] via-[#0f1015]/20 to-black/20" />
 
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                  <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-black/60 text-slate-200 backdrop-blur-md border border-white/10 tracking-wider uppercase font-mono">
+                  <span className="px-2.5 py-1 rounded text-[10px] font-semibold bg-black/60 text-slate-200 backdrop-blur-md border border-white/10 tracking-wider uppercase font-mono">
                     {dest.category}
                   </span>
                   <TrustIndicator source={dest.source} verified={dest.verified} />
                 </div>
 
                 <div className="absolute bottom-3 left-3 right-3">
-                  <div className="text-[10px] uppercase font-mono font-bold tracking-widest text-amber-300 mb-0.5">
+                  <div className="text-[10px] uppercase font-mono font-semibold tracking-widest text-amber-300 mb-0.5">
                     {dest.state} • {dest.region}
                   </div>
                   <h3 className="font-serif text-xl font-bold text-white tracking-tight">
@@ -106,7 +106,7 @@ export default function TopPlacesSection() {
                   {dest.description}
                 </p>
 
-                <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between gap-2">
+                <div className="pt-3 border-t border-white/[0.05] flex items-center justify-between gap-2">
                   <span className="text-[11px] text-slate-500 italic">
                     Curated Indian place
                   </span>
