@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapPin, Search, X, Navigation } from 'lucide-react';
 
 const INDIAN_PRESET_CITIES = [
@@ -13,13 +13,17 @@ const INDIAN_PRESET_CITIES = [
 ];
 
 export default function LocationInput({
-  city,
+  city = '',
   onCityChange,
   userCoords,
   onTriggerLocation,
   onResetLocation
 }) {
-  const [inputValue, setInputValue] = useState(city);
+  const [inputValue, setInputValue] = useState(city || '');
+
+  useEffect(() => {
+    setInputValue(city || '');
+  }, [city]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -106,13 +110,13 @@ export default function LocationInput({
           Suggested hubs:
         </span>
         {INDIAN_PRESET_CITIES.map((cityPreset) => {
-          const isActive = inputValue.toLowerCase() === cityPreset.toLowerCase();
+          const isActive = (inputValue || '').toLowerCase() === cityPreset.toLowerCase();
           return (
             <button
               key={cityPreset}
               type="button"
               onClick={() => handlePresetClick(cityPreset)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                 isActive
                   ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40'
                   : 'bg-white/[0.03] hover:bg-white/[0.07] text-slate-400 hover:text-slate-200 border border-white/[0.06]'

@@ -152,6 +152,108 @@ export const INDIAN_MOOD_ACTIVITIES = {
       suitableTimes: "Morning market hours.",
       category: "Color & Vibrance"
     }
+  ],
+
+  reflective: [
+    {
+      id: "act-in-reflective-1",
+      title: "Contemplative Sunrise Stroll by a Silent Lake or Ridge",
+      guidance: "Spend an unhurried morning observing the mist rise over a water reservoir, forest lake, or scenic hill ridge with your journal.",
+      suitableTimes: "Dawn 5:45 AM – 7:00 AM.",
+      category: "Solitude & Horizon"
+    },
+    {
+      id: "act-in-reflective-2",
+      title: "Sit Quietly inside an Ancient Monastic Hall or Stepwell",
+      guidance: "Sit quietly inside an ancient stone courtyard, baoli stepwell, or serene meditation hall to journal or quietly reflect.",
+      suitableTimes: "Mid-morning when sanctums are quiet.",
+      category: "Inner Reflection"
+    }
+  ],
+
+  sad: [
+    {
+      id: "act-in-sad-1",
+      title: "Gentle Waterside Solitude at Twilight",
+      guidance: "Sit by a quiet riverbank, lake promenade, or coastal beach watching gentle waves roll in. Let the stillness offer solace.",
+      suitableTimes: "Quiet twilight or post-sunset dusk.",
+      category: "Solace & Water"
+    },
+    {
+      id: "act-in-sad-2",
+      title: "Quiet Healing Morning with Warm Chai and Nature",
+      guidance: "Step out into a serene neighborhood garden or quiet rooftop at dawn with a comforting cup of ginger chai and silence.",
+      suitableTimes: "Early morning dawn calm.",
+      category: "Healing Rest"
+    }
+  ],
+
+  lonely: [
+    {
+      id: "act-in-lonely-1",
+      title: "Cozy Shared Reading Corner or Traveler Café",
+      guidance: "Visit a welcoming traveler café, neighborhood public reading room, or garden tea stall with friendly local regulars.",
+      suitableTimes: "Afternoon 3:00 PM – 6:00 PM.",
+      category: "Warmth & Community"
+    },
+    {
+      id: "act-in-lonely-2",
+      title: "Join an Early Morning Community Heritage Walk",
+      guidance: "Take part in an unhurried walking group through historic quarters, temple streets, or botanical trails with fellow explorers.",
+      suitableTimes: "6:30 AM weekend mornings.",
+      category: "Shared Discovery"
+    }
+  ],
+
+  focused: [
+    {
+      id: "act-in-focused-1",
+      title: "Deep Work or Study in a Quiet Mountain Library or Heritage Courtyard",
+      guidance: "Find a quiet, distraction-free environment such as a heritage library, botanical reading grove, or quiet study café.",
+      suitableTimes: "Morning 9:00 AM – 1:00 PM uninterrupted window.",
+      category: "Deep Focus"
+    },
+    {
+      id: "act-in-focused-2",
+      title: "Mindful Morning Breathing by an Open Valley or Forest Edge",
+      guidance: "Spend 30 minutes in quiet focus practice surrounded by pine trees, open horizons, or fresh morning mountain air.",
+      suitableTimes: "Early morning calm.",
+      category: "Mental Clarity"
+    }
+  ],
+
+  motivated: [
+    {
+      id: "act-in-motivated-1",
+      title: "Sunrise Ascent to an Ancient Hilltop Bastion",
+      guidance: "Trek up an ancient fortress ridge or elevated mountain viewpoint at dawn, gazing out at the vast terrain to invigorate ambition.",
+      suitableTimes: "Dawn 5:30 AM start.",
+      category: "Summit Ambition"
+    },
+    {
+      id: "act-in-motivated-2",
+      title: "Explore the Architectural Feats of Ancient Dynasties",
+      guidance: "Walk through monolithic stone carvings, monumental temple gopurams, or historic engineering wonders that stand the test of time.",
+      suitableTimes: "Morning visiting hours.",
+      category: "Mastery & Grit"
+    }
+  ],
+
+  stressful: [
+    {
+      id: "act-in-stressful-1",
+      title: "Digital Detox Retreat with Herbal Tea and Ayurvedic Calm",
+      guidance: "Power down mobile devices for half a day, savor a warm cup of herbal Kashayam or tulsi tea, and indulge in restorative rest.",
+      suitableTimes: "Any quiet afternoon or evening.",
+      category: "Restorative Reset"
+    },
+    {
+      id: "act-in-stressful-2",
+      title: "Gentle Sunset Boat Drift on Calm Backwaters",
+      guidance: "Drift slowly on a quiet lake or backwater canal on a country wooden boat, listening only to the ripple of water and distant birds.",
+      suitableTimes: "Golden hour sunset.",
+      category: "Soothing Stillness"
+    }
   ]
 };
 

@@ -53,7 +53,7 @@ export default function TopPlacesSection() {
               key={cat.id}
               type="button"
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3.5 py-1.5 rounded-full text-xs transition-all duration-150 cursor-pointer flex items-center gap-1.5 ${
+              className={`px-3.5 py-1.5 rounded-full text-xs transition-all duration-150 cursor-pointer flex items-center gap-1.5 shrink-0 whitespace-nowrap ${
                 isSelected
                   ? 'bg-white text-black font-bold shadow-sm'
                   : 'bg-white/[0.03] hover:bg-white/[0.07] text-slate-300 border border-white/[0.06]'
@@ -81,6 +81,10 @@ export default function TopPlacesSection() {
                   alt={`${dest.name}, ${dest.state}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-95"
                   loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1000&q=80";
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0f1015] via-[#0f1015]/20 to-black/20" />
 

@@ -27,7 +27,7 @@ export default function LanguageFilter({ selectedLanguage, onSelectLanguage }) {
               key={lang}
               type="button"
               onClick={() => onSelectLanguage(lang)}
-              className={`px-3.5 py-1.5 rounded-full text-xs transition-all duration-150 cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-full text-xs transition-all duration-150 cursor-pointer shrink-0 whitespace-nowrap ${
                 isSelected
                   ? 'bg-white text-black font-bold shadow-sm'
                   : 'bg-white/[0.03] hover:bg-white/[0.07] text-slate-300 hover:text-white border border-white/[0.07]'

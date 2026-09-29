@@ -31,6 +31,10 @@ export default function PlaceCard({ place, selectedMood }) {
           alt={`${name}, ${state}`}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-[0.88] group-hover:brightness-95"
           loading="lazy"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1000&q=80";
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0f1015] via-[#0f1015]/30 to-black/20" />
 

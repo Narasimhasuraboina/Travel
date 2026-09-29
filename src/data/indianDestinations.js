@@ -68,13 +68,14 @@ export const INDIAN_DESTINATIONS = [
     state: "Andhra Pradesh",
     region: "South",
     category: "Hill Station",
-    moods: ["peaceful", "nature", "romantic", "reflective", "stressful"],
+    moods: ["peaceful", "nature", "romantic", "reflective", "stressful", "focused"],
     shortDescription: "A serene hill station in the Eastern Ghats renowned for lush aromatic organic coffee plantations, misty valleys, indigenous tribal culture, and Borra Caves.",
     whyItMatches: {
       peaceful: "Misty mountain air, soothing birdsong across organic coffee estates, and silent valleys.",
       nature: "Rich flora, cascading Chaparai water streams, and million-year-old limestone stalactites at Borra Caves.",
       romantic: "Cozy scenic train journey through 84 tunnels, misty morning strolls, and fresh valley breeze.",
-      stressful: "A gentle natural retreat far away from high-density urban noise and digital overload."
+      stressful: "A gentle natural retreat far away from high-density urban noise and digital overload.",
+      focused: "Distraction-free silence amidst misty coffee plantations and clean mountain air."
     },
     activities: [
       "Explore million-year-old stalactite formations inside Borra Caves",
@@ -199,12 +200,13 @@ export const INDIAN_DESTINATIONS = [
     state: "Kerala",
     region: "South",
     category: "Culture",
-    moods: ["nostalgic", "reflective", "culture", "relaxed", "food"],
+    moods: ["nostalgic", "reflective", "culture", "relaxed", "food", "lonely"],
     shortDescription: "A legendary historic port city where Chinese fishing nets, Portuguese churches, Dutch palaces, Jewish synagogues, and contemporary art biennials intertwine.",
     whyItMatches: {
       nostalgic: "Wandering cobblestone lanes of Fort Kochi lined with 500-year-old colonial mansions and antique spice warehouses.",
       culture: "Kathakali classical dance dramas, Kalaripayattu martial arts, and vibrant street cafes.",
-      food: "Fresh coastal seafood cooked with Malabar coconut milk, Malabar parotta, and specialty filter roasts."
+      food: "Fresh coastal seafood cooked with Malabar coconut milk, Malabar parotta, and specialty filter roasts.",
+      lonely: "Cozy heritage art cafes on Princess Street with welcoming backpackers and friendly café hosts."
     },
     activities: [
       "Watch local fishermen operate ancient cantilevered Chinese Fishing Nets at sunset",
@@ -249,13 +251,14 @@ export const INDIAN_DESTINATIONS = [
     state: "Kerala",
     region: "South",
     category: "Beach",
-    moods: ["relaxed", "peaceful", "reflective", "lonely", "stressful"],
+    moods: ["relaxed", "peaceful", "reflective", "lonely", "stressful", "sad"],
     shortDescription: "Dramatic red laterite sedimentary cliffs plunging directly into the Arabian Sea, renowned for yoga retreats, mineral springs, and laid-back coastal cafes.",
     whyItMatches: {
       relaxed: "Perching on cliff-edge bamboo cafes with fresh fruit shakes watching the sun sink into the ocean.",
       peaceful: "Natural mineral springs, peaceful yoga ashrams, and quiet stretches of black sand beaches.",
       lonely: "A gentle, bohemian atmosphere where solo travelers and contemplative souls feel instantly embraced.",
-      stressful: "Deep ocean vistas, daily sunset mindfulness, and therapeutic Ayurvedic massage centers."
+      stressful: "Deep ocean vistas, daily sunset mindfulness, and therapeutic Ayurvedic massage centers.",
+      sad: "Healing ocean waves crashing against red cliffs, offering peaceful solace and quiet recovery."
     },
     activities: [
       "Cliff-top sunset walk overlooking the endless Arabian Sea",
@@ -428,13 +431,14 @@ export const INDIAN_DESTINATIONS = [
     state: "Karnataka",
     region: "South",
     category: "Nature Escape",
-    moods: ["peaceful", "romantic", "nature", "relaxed", "stressful"],
+    moods: ["peaceful", "romantic", "nature", "relaxed", "stressful", "lonely"],
     shortDescription: "The Scotland of India, an emerald mountain district covered in dense aromatic coffee plantations, spice gardens, misty peaks, and warrior Kodava culture.",
     whyItMatches: {
       peaceful: "Waking up to birdsong and misty views in secluded coffee estate homestays.",
       nature: "Lush Western Ghats rainforests, cascading Abbey Falls, and rich wildlife at Nagarhole.",
       romantic: "Cozy evenings by plantation fires with locally roasted Arabica coffee and valley mists.",
-      stressful: "Complete digital disconnection amidst pristine greenery and refreshing cool rains."
+      stressful: "Complete digital disconnection amidst pristine greenery and refreshing cool rains.",
+      lonely: "Warm Kodava family hospitality, shared plantation meals, and peaceful fireside conversations."
     },
     activities: [
       "Stay in a working coffee estate homestay and learn coffee harvesting and roasting",
@@ -709,12 +713,13 @@ export const INDIAN_DESTINATIONS = [
     state: "Himachal Pradesh",
     region: "North",
     category: "Hill Station",
-    moods: ["nostalgic", "romantic", "peaceful", "relaxed"],
+    moods: ["nostalgic", "romantic", "peaceful", "relaxed", "focused"],
     shortDescription: "The former British summer capital perched along a crescent mountain ridge, famous for its pedestrian Mall Road, neo-Gothic Christ Church, and pine vistas.",
     whyItMatches: {
       nostalgic: "Colonial British architecture, the UNESCO Kalka-Shimla toy train, and historic Gaiety Theatre.",
       romantic: "Misty mountain promenades along the vehicle-free Ridge and snow-capped Himalayan panoramas.",
-      relaxed: "Unhurried afternoons sipping warm tea while overlooking valleys draped in mountain mist."
+      relaxed: "Unhurried afternoons sipping warm tea while overlooking valleys draped in mountain mist.",
+      focused: "Quiet heritage reading rooms at the Indian Institute of Advanced Study and tranquil pine forest walks."
     },
     activities: [
       "Stroll along the historic vehicle-free Mall Road and scenic Ridge to Christ Church",

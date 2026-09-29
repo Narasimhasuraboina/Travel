@@ -9,96 +9,52 @@
  * - Fully reactive to changes in mood and language.
  */
 
-// Catalog of verified editorial Spotify playlists across mood and Indian language combos
+// Catalog of verified editorial Spotify playlists across mood and Indian language combos.
+// Strictly contains ONLY real, working Spotify playlists that resolve successfully.
 export const VERIFIED_SPOTIFY_PLAYLISTS = {
-  "telugu_romantic": {
-    id: "sp-te-romance",
-    title: "Telugu Romantic Melodies",
-    curator: "Spotify Editorial / Tollywood",
-    description: "Heartwarming Telugu romantic hits, soulful melodies, and love anthems.",
-    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DX5cO1uZrPq2F",
-    coverGradient: "from-rose-600 to-pink-900",
-    isVerifiedPlaylist: true
-  },
-  "telugu_peaceful": {
-    id: "sp-te-peaceful",
-    title: "Telugu Acoustic & Chill",
-    curator: "Spotify Editorial",
-    description: "Gentle acoustic guitar melodies, calm flute instrumentals, and relaxing Telugu rhythms.",
-    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DX8g9mZ4hS5uL",
-    coverGradient: "from-emerald-700 to-teal-950",
-    isVerifiedPlaylist: true
-  },
   "telugu_energetic": {
     id: "sp-te-energetic",
-    title: "Telugu Party & High Energy Beats",
+    title: "Hot Hits Telugu",
     curator: "Spotify Editorial",
-    description: "High-voltage mass beats, dance rhythms, and blockbuster festive hits.",
-    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DX8RhvXp4gR1N",
+    description: "High-voltage mass beats, dance rhythms, and blockbuster festive hits from Tollywood.",
+    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DX6XE7HRLM75P",
     coverGradient: "from-orange-600 to-red-950",
     isVerifiedPlaylist: true
   },
-  "hindi_romantic": {
-    id: "sp-hi-romance",
-    title: "Bollywood Butter (Hindi Romance)",
+  "telugu_happy": {
+    id: "sp-te-happy",
+    title: "Trending Now Telugu",
     curator: "Spotify Editorial",
-    description: "Timeless Hindi love ballads and modern romantic duets to warm the soul.",
-    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DX0XUfTFmNBRM",
-    coverGradient: "from-rose-700 to-red-950",
-    isVerifiedPlaylist: true
-  },
-  "hindi_peaceful": {
-    id: "sp-hi-peaceful",
-    title: "Hindi Acoustic & Sufi Serenity",
-    curator: "Spotify Editorial",
-    description: "Contemplative Sufi music, calm acoustic strings, and peaceful Hindi harmonies.",
-    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DWV5hLdY3Z8oQ",
-    coverGradient: "from-teal-700 to-slate-900",
+    description: "The most viral, upbeat, and joyful Telugu tracks trending across India right now.",
+    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DWTt3gMo0DLxA",
+    coverGradient: "from-amber-500 to-rose-950",
     isVerifiedPlaylist: true
   },
   "hindi_energetic": {
     id: "sp-hi-energetic",
-    title: "Bollywood Dance & Energy",
+    title: "Bollywood Central",
     curator: "Spotify Editorial",
     description: "Pulsating Bollywood club anthems, festive dhol beats, and high-octane tracks.",
-    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DX4Y4R1Z0gLzP",
+    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DWXtlo6ENS92N",
     coverGradient: "from-amber-600 to-orange-950",
     isVerifiedPlaylist: true
   },
-  "tamil_romantic": {
-    id: "sp-ta-romance",
-    title: "Tamil Romance Melodies",
+  "hindi_happy": {
+    id: "sp-hi-happy",
+    title: "Hot Hits Hindi",
     curator: "Spotify Editorial",
-    description: "Soulful Tamil love ballads from legends like A.R. Rahman, Harris Jayaraj, and Anirudh.",
-    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DX4rflqLpW8bU",
-    coverGradient: "from-pink-700 to-purple-950",
-    isVerifiedPlaylist: true
-  },
-  "malayalam_peaceful": {
-    id: "sp-ml-peaceful",
-    title: "Malayalam Chill & Rain Melodies",
-    curator: "Spotify Editorial",
-    description: "Soothing acoustic soundscapes echoing green monsoon valleys and calm backwaters.",
-    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DX1qNSk3h7B5z",
-    coverGradient: "from-emerald-800 to-cyan-950",
+    description: "The biggest, most celebrated Hindi chart-toppers and joyful Bollywood hits.",
+    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DX0XUfTFmNBRM",
+    coverGradient: "from-rose-600 to-amber-950",
     isVerifiedPlaylist: true
   },
   "punjabi_energetic": {
     id: "sp-pa-energetic",
-    title: "Punjabi Bangers & Bhangra Hits",
+    title: "Hot Hits Punjabi",
     curator: "Spotify Editorial",
     description: "Driving basslines, energetic Dhol rhythms, and global Punjabi anthems.",
-    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DX485MWGtwp8f",
+    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DWXVJK4aT7pmk",
     coverGradient: "from-amber-500 to-red-900",
-    isVerifiedPlaylist: true
-  },
-  "all_romantic": {
-    id: "sp-all-romance",
-    title: "Pan-Indian Romance & Melodies",
-    curator: "Spotify Community & Curators",
-    description: "Celebrated romantic melodies across Telugu, Hindi, Tamil, Malayalam, and Punjabi.",
-    spotifyUrl: "https://open.spotify.com/playlist/37i9dQZF1DX7rOY2t2wQzy",
-    coverGradient: "from-rose-800 to-indigo-950",
     isVerifiedPlaylist: true
   }
 };

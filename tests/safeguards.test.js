@@ -6,7 +6,7 @@ import {
   findIndianDestinationByName
 } from '../src/services/placesService';
 import { getSongsByMoodAndLanguage } from '../src/services/musicService';
-import { getSpotifyRecommendation } from '../src/services/spotifyService';
+import { getSpotifyRecommendation, VERIFIED_SPOTIFY_PLAYLISTS } from '../src/services/spotifyService';
 import {
   getSimulatedLocationState,
   LOCATION_STATUS
@@ -14,6 +14,8 @@ import {
 import { validateAiOutput } from '../src/services/aiSafeguardService';
 import { INDIAN_DESTINATIONS } from '../src/data/indianDestinations';
 import { INDIAN_SONGS, INDIAN_LANGUAGES } from '../src/data/indianSongs';
+import { MOODS } from '../src/data/moods';
+import { getIndianActivitiesForMood } from '../src/data/indianActivities';
 
 describe('MoodTrip - INDIA-FIRST ACCURACY SAFEGUARD TEST SUITE (Rule 12 Compliance)', () => {
 
@@ -130,10 +132,10 @@ describe('MoodTrip - INDIA-FIRST ACCURACY SAFEGUARD TEST SUITE (Rule 12 Complian
 
   // Test 11: Spotify recommendations
   it('Returns verified Spotify playlist for verified combinations and legitimate search URL otherwise', () => {
-    // Telugu + Romantic has verified playlist
-    const teluguRec = getSpotifyRecommendation('romantic', 'Telugu');
+    // Telugu + Energetic has verified playlist (Hot Hits Telugu)
+    const teluguRec = getSpotifyRecommendation('energetic', 'Telugu');
     expect(teluguRec.isCuratedPlaylist).toBe(true);
-    expect(teluguRec.spotifyUrl).toContain('spotify.com/playlist/');
+    expect(teluguRec.spotifyUrl).toBe('https://open.spotify.com/playlist/37i9dQZF1DX6XE7HRLM75P');
 
     // Fallback combination generates legitimate search URL
     const searchRec = getSpotifyRecommendation('focused', 'Assamese');
@@ -190,6 +192,127 @@ describe('MoodTrip - INDIA-FIRST ACCURACY SAFEGUARD TEST SUITE (Rule 12 Complian
         expect(dest.name.toLowerCase()).not.toContain(kw.toLowerCase());
         expect(dest.state.toLowerCase()).not.toContain(kw.toLowerCase());
       }
+    }
+  });
+
+  // Test 16: Required Indian Languages Coverage
+  it('Includes all 12 required Indian regional languages in catalog with authentic songs', () => {
+    const requiredLanguages = [
+      'Telugu', 'Hindi', 'Tamil', 'Kannada', 'Malayalam',
+      'Bengali', 'Marathi', 'Gujarati', 'Punjabi', 'Odia', 'Assamese', 'Urdu'
+    ];
+
+    for (const lang of requiredLanguages) {
+      expect(INDIAN_LANGUAGES).toContain(lang);
+      const songsInLang = INDIAN_SONGS.filter(s => s.language === lang);
+      expect(songsInLang.length).toBeGreaterThan(0);
+      for (const song of songsInLang) {
+        expect(song.spotifyQuery).toBeTruthy();
+        expect(song.youtubeQuery).toBeTruthy();
+      }
+    }
+  });
+
+  // Test 17: All 15 Moods have complete coverage of places and activities
+  it('All 15 moods have valid definitions, curated places, and curated activity ideas', async () => {
+    expect(MOODS).toHaveLength(15);
+
+    for (const mood of MOODS) {
+      expect(mood).toHaveProperty('id');
+      expect(mood).toHaveProperty('name');
+      expect(mood).toHaveProperty('emoji');
+      expect(mood).toHaveProperty('tagline');
+
+      // Test places for each mood
+      const res = await getPlacesByMood({ mood: mood.id });
+      expect(res.places.length).toBeGreaterThan(0);
+
+      // Test activities for each mood
+      const activities = getIndianActivitiesForMood(mood.id);
+      expect(activities.length).toBeGreaterThan(0);
+      for (const act of activities) {
+        expect(act).toHaveProperty('title');
+        expect(act).toHaveProperty('guidance');
+      }
+    }
+  });
+
+  // Test 18: Spotify Recommendation URLs are legitimate and never fabricate IDs
+  it('Ensures Spotify recommendation URLs are strictly valid without fabricated IDs', () => {
+    const allLangs = ['Telugu', 'Hindi', 'Tamil', 'Kannada', 'Malayalam', 'Bengali', 'Marathi', 'Gujarati', 'Punjabi', 'Odia', 'Assamese', 'Urdu', 'All Indian Languages'];
+    const curatedUrls = Object.values(VERIFIED_SPOTIFY_PLAYLISTS).map(p => p.spotifyUrl);
+
+    for (const mood of MOODS) {
+      for (const lang of allLangs) {
+        const rec = getSpotifyRecommendation(mood.id, lang);
+        expect(rec).toHaveProperty('spotifyUrl');
+        expect(rec).toHaveProperty('badgeText');
+        expect(rec).toHaveProperty('buttonText');
+        if (rec.isCuratedPlaylist) {
+          expect(curatedUrls).toContain(rec.spotifyUrl);
+          expect(rec.spotifyUrl).toMatch(/^https:\/\/open\.spotify\.com\/playlist\/37i9dQZF1[a-zA-Z0-9]+/);
+        } else {
+          expect(rec.spotifyUrl).toMatch(/^https:\/\/open\.spotify\.com\/search\//);
+        }
+      }
+    }
+  });
+
+  // Test 19: Distance calculation edge cases and boundaries
+  it('Haversine distance calculation handles NaN, out-of-range, and boundary coordinates safely', () => {
+    expect(calculateHaversineDistanceKm(null, 80.6, 17.6, 83.2)).toBeNull();
+    expect(calculateHaversineDistanceKm(16.5, null, 17.6, 83.2)).toBeNull();
+    expect(calculateHaversineDistanceKm(16.5, 80.6, undefined, 83.2)).toBeNull();
+    expect(calculateHaversineDistanceKm(16.5, 80.6, 17.6, undefined)).toBeNull();
+    expect(calculateHaversineDistanceKm('invalid', 80.6, 17.6, 83.2)).toBeNull();
+    expect(calculateHaversineDistanceKm(95, 80.6, 17.6, 83.2)).toBeNull(); // lat > 90
+    expect(calculateHaversineDistanceKm(-95, 80.6, 17.6, 83.2)).toBeNull(); // lat < -90
+    expect(calculateHaversineDistanceKm(16.5, 200, 17.6, 83.2)).toBeNull(); // lon > 180
+    // Same coordinate distance should be 0
+    expect(calculateHaversineDistanceKm(16.5, 80.6, 16.5, 80.6)).toBe(0);
+  });
+
+  // Test 20: Name search case-insensitivity and substring matching
+  it('findIndianDestinationByName matches case-insensitively and handles whitespace and empty input', () => {
+    expect(findIndianDestinationByName('')).toBeNull();
+    expect(findIndianDestinationByName(null)).toBeNull();
+    expect(findIndianDestinationByName(undefined)).toBeNull();
+    expect(findIndianDestinationByName('   ')).toBeNull();
+
+    const vja = findIndianDestinationByName('  vijayawada  ');
+    expect(vja).not.toBeNull();
+    expect(vja.id).toBe('vijayawada');
+
+    const vizag = findIndianDestinationByName('VIZAG');
+    expect(vizag).not.toBeNull();
+    expect(vizag.id).toBe('visakhapatnam');
+  });
+
+  // Test 21: Package.json cross-platform purity (No OS-specific hardcoded dependencies)
+  it('package.json strictly contains zero hardcoded platform-specific bindings', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const pkgPath = path.resolve(process.cwd(), 'package.json');
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+
+    const allDeps = {
+      ...(pkg.dependencies || {}),
+      ...(pkg.devDependencies || {})
+    };
+
+    expect(allDeps).not.toHaveProperty('@rolldown/binding-linux-x64-gnu');
+    expect(allDeps).not.toHaveProperty('@rolldown/binding-win32-x64-msvc');
+    expect(allDeps).not.toHaveProperty('@rolldown/binding-darwin-arm64');
+  });
+
+  // Test 22: Image URLs and destination fields integrity
+  it('Every destination has valid HTTPS image URLs and no fabricated attributes', () => {
+    for (const d of INDIAN_DESTINATIONS) {
+      expect(d.imageUrl).toMatch(/^https:\/\//);
+      expect(d.shortDescription.length).toBeGreaterThan(20);
+      expect(d.activities.length).toBeGreaterThan(0);
+      expect(d.source).toBe('curated');
+      expect(d.verified).toBe(false);
     }
   });
 });
