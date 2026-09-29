@@ -23,14 +23,14 @@ export default function SongCard({ song, index = 0 }) {
         <div className="flex items-center justify-between gap-2 mb-3">
           <div className="flex items-center gap-2">
             <span className="font-mono text-[10px] font-semibold text-slate-500 bg-white/[0.03] px-2 py-0.5 rounded border border-white/[0.05]">
-              0{index + 1}
+              {String(index + 1).padStart(2, '0')}
             </span>
-            <span className="inline-flex items-center gap-1 text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-white/[0.04] text-slate-300 border border-white/[0.07]">
+            <span className="font-mono text-[10px] font-bold tracking-wider px-2 py-0.5 rounded bg-amber-400/15 text-amber-300 border border-amber-400/30 uppercase">
               {language}
             </span>
           </div>
 
-          <span className="text-[11px] text-slate-500 font-medium truncate max-w-[140px]">
+          <span className="text-[11px] text-slate-400 font-mono truncate max-w-[150px]">
             {movieOrAlbum} {year ? `• ${year}` : ''}
           </span>
         </div>

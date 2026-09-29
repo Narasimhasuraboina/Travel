@@ -315,4 +315,81 @@ describe('MoodTrip - INDIA-FIRST ACCURACY SAFEGUARD TEST SUITE (Rule 12 Complian
       expect(d.verified).toBe(false);
     }
   });
+
+  // Test 23: Destination -> Specific Attractions architecture
+  it('Every destination has curated attractions with schema compliance and categories', () => {
+    expect(INDIAN_DESTINATIONS.length).toBeGreaterThanOrEqual(35);
+    for (const d of INDIAN_DESTINATIONS) {
+      expect(d).toHaveProperty('attractions');
+      expect(Array.isArray(d.attractions)).toBe(true);
+      expect(d.attractions.length).toBeGreaterThanOrEqual(4);
+      for (const att of d.attractions) {
+        expect(att).toHaveProperty('name');
+        expect(att).toHaveProperty('category');
+        expect(att).toHaveProperty('moods');
+        expect(att).toHaveProperty('description');
+        expect(att.source).toBe('curated');
+        expect(att.verified).toBe(false);
+        expect(att).not.toHaveProperty('rating');
+        expect(att).not.toHaveProperty('reviews');
+        expect(att).not.toHaveProperty('openingHours');
+      }
+    }
+  });
+
+  // Test 24: Specific city attraction-level recommendations
+  it('Recommends authentic attractions when a specific Indian city is selected', async () => {
+    // Vijayawada + Spiritual
+    const vjaRes = await getPlacesByMood({ userCity: 'Vijayawada', mood: 'spiritual' });
+    expect(vjaRes.localPlaces.length).toBe(1);
+    const vjaAtts = vjaRes.localPlaces[0].matchingAttractions.map(a => a.name);
+    expect(vjaAtts.some(n => n.includes('Kanaka Durga'))).toBe(true);
+
+    // Hyderabad + Romantic
+    const hydRes = await getPlacesByMood({ userCity: 'Hyderabad', mood: 'romantic' });
+    expect(hydRes.localPlaces.length).toBe(1);
+    const hydAtts = hydRes.localPlaces[0].matchingAttractions.map(a => a.name);
+    expect(hydAtts.some(n => n.includes('Chowmahalla') || n.includes('Hussain Sagar') || n.includes('Durgam Cheruvu'))).toBe(true);
+  });
+
+  // Test 25: Image correctness - Hyderabad is not Taj Mahal, all images unique
+  it('Verifies Hyderabad has a representative image and zero duplicate images exist', () => {
+    const hyd = INDIAN_DESTINATIONS.find(d => d.id === 'hyderabad');
+    const agra = INDIAN_DESTINATIONS.find(d => d.id === 'agra');
+    expect(hyd).toBeDefined();
+    expect(agra).toBeDefined();
+    expect(hyd.imageUrl).not.toBe(agra.imageUrl);
+
+    const imageUrls = INDIAN_DESTINATIONS.map(d => d.imageUrl);
+    const uniqueUrls = new Set(imageUrls);
+    expect(uniqueUrls.size).toBe(INDIAN_DESTINATIONS.length);
+  });
+
+  // Test 26: Balanced Indian Regional Languages Music Library
+  it('Ensures all 12 Indian regional languages have balanced libraries (>= 15 verified songs each)', () => {
+    const requiredLanguages = [
+      'Telugu', 'Hindi', 'Tamil', 'Kannada', 'Malayalam',
+      'Bengali', 'Marathi', 'Gujarati', 'Punjabi', 'Odia', 'Assamese', 'Urdu'
+    ];
+
+    for (const lang of requiredLanguages) {
+      const songs = INDIAN_SONGS.filter(s => s.language === lang);
+      expect(songs.length).toBeGreaterThanOrEqual(15);
+      // Check mood variety per language
+      const moodsCovered = new Set();
+      songs.forEach(s => (s.moods || []).forEach(m => moodsCovered.add(m)));
+      expect(moodsCovered.size).toBeGreaterThanOrEqual(4);
+    }
+  });
+
+  // Test 27: All Indian Languages distribution distributes evenly across regions
+  it('All Indian Languages mode distributes songs across diverse languages round-robin', () => {
+    const res = getSongsByMoodAndLanguage({ language: 'All Indian Languages', mood: 'romantic' });
+    expect(res.fallbackRequired).toBe(false);
+    expect(res.songs.length).toBeGreaterThan(10);
+
+    const first10Languages = res.songs.slice(0, 10).map(s => s.language);
+    const uniqueFirst10 = new Set(first10Languages);
+    expect(uniqueFirst10.size).toBeGreaterThanOrEqual(8);
+  });
 });

@@ -37,6 +37,32 @@ export function getSongsByMoodAndLanguage({ mood = '', language = 'All Indian La
     filtered = filtered.filter(song => {
       return song.language.toLowerCase() === normLang.toLowerCase();
     });
+  } else {
+    // When "All Indian Languages" is selected, deliberately distribute
+    // recommendations across all supported Indian languages round-robin
+    const allSpecificLanguages = INDIAN_LANGUAGES.filter(l => l !== 'All Indian Languages');
+    const songsByLanguage = {};
+    for (const lang of allSpecificLanguages) {
+      songsByLanguage[lang] = filtered.filter(s => s.language.toLowerCase() === lang.toLowerCase());
+    }
+
+    const distributed = [];
+    let round = 0;
+    let addedInRound = true;
+    while (addedInRound && round < 10) {
+      addedInRound = false;
+      for (const lang of allSpecificLanguages) {
+        if (songsByLanguage[lang] && songsByLanguage[lang][round]) {
+          distributed.push(songsByLanguage[lang][round]);
+          addedInRound = true;
+        }
+      }
+      round++;
+    }
+
+    if (distributed.length > 0) {
+      filtered = distributed;
+    }
   }
 
   // Fallback when no songs match the combination

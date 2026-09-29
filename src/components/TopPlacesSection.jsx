@@ -106,9 +106,27 @@ export default function TopPlacesSection() {
               </div>
 
               <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
-                <p className="text-xs text-slate-300 leading-relaxed font-light line-clamp-3">
+                <p className="text-xs text-slate-300 leading-relaxed font-light line-clamp-2">
                   {dest.description}
                 </p>
+
+                {dest.attractions && dest.attractions.length > 0 && (
+                  <div className="pt-2 border-t border-white/[0.04]">
+                    <span className="text-[9px] font-mono text-amber-300/80 uppercase tracking-widest block mb-1.5 font-bold">
+                      Curated Highlights
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {dest.attractions.slice(0, 3).map((a, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[10px] px-2 py-0.5 rounded-md bg-white/[0.03] text-slate-300 border border-white/[0.06] font-medium"
+                        >
+                          {a.name}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 <div className="pt-3 border-t border-white/[0.05] flex items-center justify-between gap-2">
                   <span className="text-[11px] text-slate-500 italic">

@@ -95,15 +95,34 @@ function enrichDestination(dest, userCoords, currentMood) {
     ? dest.whyItMatches[currentMood]
     : dest.shortDescription;
 
+  const allAttractions = (dest.attractions || []).map(att => ({
+    ...att,
+    source: att.source || 'curated',
+    verified: Boolean(att.verified)
+  }));
+
+  const moodMatchedAttractions = allAttractions.filter(att =>
+    att.moods && att.moods.map(m => m.toLowerCase()).includes(currentMood)
+  );
+
+  // If attractions match the active mood, prioritize them; otherwise show curated highlights
+  const displayAttractions = moodMatchedAttractions.length > 0
+    ? moodMatchedAttractions
+    : allAttractions.slice(0, 4);
+
   const item = {
     id: dest.id,
     name: dest.name,
+    city: dest.city || dest.name,
     state: dest.state,
     region: dest.region,
     category: dest.category,
+    type: dest.type || dest.category,
     description: dest.shortDescription,
     whyItMatchesMood: whyReason,
     activities: dest.activities || [],
+    attractions: allAttractions,
+    matchingAttractions: displayAttractions,
     latitude: typeof dest.latitude === 'number' ? dest.latitude : null,
     longitude: typeof dest.longitude === 'number' ? dest.longitude : null,
     source: dest.source || 'curated',
@@ -233,11 +252,14 @@ export function getTopPlacesInIndia({ category = 'all', searchQuery = '' } = {})
   return list.map(d => ({
     id: d.id,
     name: d.name,
+    city: d.city || d.name,
     state: d.state,
     region: d.region,
     category: d.category,
+    type: d.type || d.category,
     description: d.shortDescription,
     activities: d.activities || [],
+    attractions: d.attractions || [],
     imageUrl: d.imageUrl,
     source: 'curated',
     verified: false
