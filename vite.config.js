@@ -10,9 +10,7 @@ export default defineConfig({
           groups: [
             {
               name: 'vendor',
-              test: /node_modules/,
-              minSize: 100_000,
-              maxSize: 300_000,
+              test: /node_modules[\\/]/,
               priority: 10,
             },
           ],

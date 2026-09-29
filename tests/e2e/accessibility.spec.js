@@ -19,8 +19,11 @@ async function expectAccessible(page) {
 }
 
 test('light theme renders without automated WCAG violations', async ({ page }) => {
+  const runtimeErrors = [];
+  page.on('pageerror', (error) => runtimeErrors.push(error.message));
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Where does your mood want to go?' })).toBeVisible();
+  expect(runtimeErrors).toEqual([]);
   await expect(page.getByRole('button', { name: 'Romantic' })).toHaveAttribute('aria-pressed', 'true');
   const peacefulMood = page.getByRole('button', { name: 'Peaceful' });
   await peacefulMood.focus();
@@ -30,6 +33,8 @@ test('light theme renders without automated WCAG violations', async ({ page }) =
 });
 
 test('dark theme toggle persists and meets automated WCAG checks', async ({ page }) => {
+  const runtimeErrors = [];
+  page.on('pageerror', (error) => runtimeErrors.push(error.message));
   await page.goto('/');
   await page.getByRole('button', { name: 'Switch to dark mode' }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
@@ -37,13 +42,17 @@ test('dark theme toggle persists and meets automated WCAG checks', async ({ page
   await expectAccessible(page);
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  expect(runtimeErrors).toEqual([]);
 });
 
 test('mobile layout has no horizontal overflow and meets automated WCAG checks', async ({ page }) => {
+  const runtimeErrors = [];
+  page.on('pageerror', (error) => runtimeErrors.push(error.message));
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Where does your mood want to go?' })).toBeVisible();
   const hasHorizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
   expect(hasHorizontalOverflow).toBe(false);
   await expectAccessible(page);
+  expect(runtimeErrors).toEqual([]);
 });
