@@ -42,6 +42,7 @@ export default function App() {
   // Geolocation
   const [userCoords, setUserCoords] = useState(null);
   const [locationStatus, setLocationStatus] = useState(LOCATION_STATUS.IDLE);
+  const [locationMessage, setLocationMessage] = useState('');
   const [isConsentModalOpen, setIsConsentModalOpen] = useState(false);
 
   // Recommendations state
@@ -158,12 +159,14 @@ export default function App() {
     setLocationStatus(LOCATION_STATUS.REQUESTING);
     const res = await requestBrowserGeolocation();
     setLocationStatus(res.status);
+    setLocationMessage(res.message);
     setUserCoords(res.coords);
   };
 
   const handleResetLocation = () => {
     setUserCoords(null);
     setLocationStatus(LOCATION_STATUS.IDLE);
+    setLocationMessage('');
   };
 
   return (
@@ -259,6 +262,11 @@ export default function App() {
             onTriggerLocation={handleTriggerLocation}
             onResetLocation={handleResetLocation}
           />
+          {locationMessage && (
+            <p role="status" className={`mt-2 text-xs ${locationStatus === LOCATION_STATUS.GRANTED ? 'text-emerald-300' : 'text-amber-200'}`}>
+              {locationMessage}
+            </p>
+          )}
         </section>
 
         {/* RECOMMENDATION RESULTS CONTAINER */}
@@ -422,7 +430,6 @@ export default function App() {
                 <PlaceCard
                   key={place.id}
                   place={place}
-                  selectedMood={selectedMoodId}
                 />
               ))}
             </div>

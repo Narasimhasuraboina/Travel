@@ -80,10 +80,12 @@ export function findIndianDestinationByName(cityName) {
   const norm = cityName.trim().toLowerCase();
   if (!norm) return null;
 
+  const aliases = { vizag: 'visakhapatnam', mysore: 'mysuru', kodagu: 'coorg', 'leh ladakh': 'leh-ladakh' };
+  const lookup = aliases[norm] || norm;
+
   return INDIAN_DESTINATIONS.find(d => {
-    const nameMatch = d.name.toLowerCase() === norm || d.name.toLowerCase().includes(norm);
-    const idMatch = d.id === norm;
-    return nameMatch || idMatch;
+    const canonicalName = d.name.toLowerCase().replace(/\s*\([^)]*\)/g, '').trim();
+    return canonicalName === lookup || d.name.toLowerCase() === lookup || d.id === lookup;
   }) || null;
 }
 
@@ -127,7 +129,6 @@ function enrichDestination(dest, userCoords, currentMood) {
     longitude: typeof dest.longitude === 'number' ? dest.longitude : null,
     source: dest.source || 'curated',
     verified: Boolean(dest.verified),
-    imageUrl: dest.imageUrl,
     distanceKm: null
   };
 
@@ -260,7 +261,6 @@ export function getTopPlacesInIndia({ category = 'all', searchQuery = '' } = {})
     description: d.shortDescription,
     activities: d.activities || [],
     attractions: d.attractions || [],
-    imageUrl: d.imageUrl,
     source: 'curated',
     verified: false
   }));

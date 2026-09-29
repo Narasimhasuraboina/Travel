@@ -1,8 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { Compass, Search, MapPin, ExternalLink } from 'lucide-react';
+import { Compass, Search, ExternalLink } from 'lucide-react';
 import { DESTINATION_CATEGORIES } from '../data/categories';
 import { getTopPlacesInIndia } from '../services/placesService';
 import TrustIndicator from './TrustIndicator';
+import DestinationArtwork from './DestinationArtwork';
 
 export default function TopPlacesSection() {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -75,33 +76,10 @@ export default function TopPlacesSection() {
               key={dest.id}
               className="group bg-[#0f1015] border border-white/[0.07] hover:border-white/[0.18] rounded-2xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between"
             >
-              <div className="relative h-48 w-full overflow-hidden bg-[#0a0b0e]">
-                <img
-                  src={dest.imageUrl}
-                  alt={`${dest.name}, ${dest.state}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-95"
-                  loading="lazy"
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1000&q=80";
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0f1015] via-[#0f1015]/20 to-black/20" />
-
-                <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                  <span className="px-2.5 py-1 rounded text-[10px] font-semibold bg-black/60 text-slate-200 backdrop-blur-md border border-white/10 tracking-wider uppercase font-mono">
-                    {dest.category}
-                  </span>
+              <div className="relative">
+                <DestinationArtwork name={dest.name} state={dest.state} region={dest.region} category={dest.category} compact />
+                <div className="absolute right-3 top-12 z-10">
                   <TrustIndicator source={dest.source} verified={dest.verified} />
-                </div>
-
-                <div className="absolute bottom-3 left-3 right-3">
-                  <div className="text-[10px] uppercase font-mono font-semibold tracking-widest text-amber-300 mb-0.5">
-                    {dest.state} • {dest.region}
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-white tracking-tight">
-                    {dest.name}
-                  </h3>
                 </div>
               </div>
 

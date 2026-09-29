@@ -77,13 +77,13 @@ export function getSongsByMoodAndLanguage({ mood = '', language = 'All Indian La
     };
   }
 
-  // Enrich with verified search/listen URLs
+  // Build search URLs for each curated track; the links do not verify the track metadata.
   const enrichedSongs = filtered.map(song => ({
     ...song,
     spotifyUrl: `https://open.spotify.com/search/${encodeURIComponent(song.spotifyQuery)}`,
     youtubeUrl: `https://www.youtube.com/results?search_query=${encodeURIComponent(song.youtubeQuery)}`,
     source: 'curated',
-    verified: true
+    verified: false
   }));
 
   return {

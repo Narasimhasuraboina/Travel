@@ -305,10 +305,10 @@ describe('MoodTrip - INDIA-FIRST ACCURACY SAFEGUARD TEST SUITE (Rule 12 Complian
     expect(allDeps).not.toHaveProperty('@rolldown/binding-darwin-arm64');
   });
 
-  // Test 22: Image URLs and destination fields integrity
-  it('Every destination has valid HTTPS image URLs and no fabricated attributes', () => {
+  // Test 22: Destination data integrity and no unverified image URLs
+  it('Every destination has valid descriptions and no unverified photo URLs', () => {
     for (const d of INDIAN_DESTINATIONS) {
-      expect(d.imageUrl).toMatch(/^https:\/\//);
+      expect(d).not.toHaveProperty('imageUrl');
       expect(d.shortDescription.length).toBeGreaterThan(20);
       expect(d.activities.length).toBeGreaterThan(0);
       expect(d.source).toBe('curated');
@@ -352,17 +352,10 @@ describe('MoodTrip - INDIA-FIRST ACCURACY SAFEGUARD TEST SUITE (Rule 12 Complian
     expect(hydAtts.some(n => n.includes('Chowmahalla') || n.includes('Hussain Sagar') || n.includes('Durgam Cheruvu'))).toBe(true);
   });
 
-  // Test 25: Image correctness - Hyderabad is not Taj Mahal, all images unique
-  it('Verifies Hyderabad has a representative image and zero duplicate images exist', () => {
-    const hyd = INDIAN_DESTINATIONS.find(d => d.id === 'hyderabad');
-    const agra = INDIAN_DESTINATIONS.find(d => d.id === 'agra');
-    expect(hyd).toBeDefined();
-    expect(agra).toBeDefined();
-    expect(hyd.imageUrl).not.toBe(agra.imageUrl);
-
-    const imageUrls = INDIAN_DESTINATIONS.map(d => d.imageUrl);
-    const uniqueUrls = new Set(imageUrls);
-    expect(uniqueUrls.size).toBe(INDIAN_DESTINATIONS.length);
+  // Test 25: City matching requires a complete name or supported alias
+  it('Does not treat a partial city name as a supported location', () => {
+    expect(findIndianDestinationByName('hyd')).toBeNull();
+    expect(findIndianDestinationByName('Hyderabad')?.id).toBe('hyderabad');
   });
 
   // Test 26: Balanced Indian Regional Languages Music Library

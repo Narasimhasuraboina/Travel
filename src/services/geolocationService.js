@@ -23,7 +23,7 @@ export const LOCATION_STATUS = {
  * Requests browser geolocation with explicit user consent and privacy protection.
  */
 export async function requestBrowserGeolocation() {
-  if (typeof window === 'undefined' || !navigator || !navigator.geolocation) {
+  if (typeof window === 'undefined' || typeof navigator === 'undefined' || !navigator.geolocation) {
     return {
       status: LOCATION_STATUS.UNAVAILABLE,
       coords: null,

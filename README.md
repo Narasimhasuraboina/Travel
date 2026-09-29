@@ -18,7 +18,7 @@ MoodTrip answers one fundamental emotional question:
    - Distinct atmospheric personality, color gradients, and tailored Indian travel recommendations.
 3. **Multi-Language Indian Music System**:
    - Extensive coverage of **Telugu**, Hindi, Tamil, Kannada, Malayalam, Bengali, Marathi, Gujarati, Punjabi, Odia, Assamese, Urdu, plus "All Indian Languages".
-   - Verified track catalog with authentic titles, artists, and release years.
+   - Curated track catalog with titles, artists, and release years; tracks are labeled curated, not officially verified.
 4. **Verified Spotify Integration**:
    - Automatic recommendation of curated editorial Spotify playlists for mood + language combinations (e.g. Telugu Romantic, Malayalam Peaceful, Punjabi Energetic, Hindi Happy).
    - If an official playlist is not verified in the dataset, the platform generates a legitimate Spotify search URL labeled honestly as **"Search Spotify"** rather than fabricating an ID.
@@ -39,13 +39,13 @@ MoodTrip answers one fundamental emotional question:
 - **Styling**: Tailwind CSS v4 + Plus Jakarta Sans & JetBrains Mono typography
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
-- **Testing**: Vitest (15 automated safeguard & edge-case test suites)
+- **Testing**: Vitest (27 automated safeguard and edge-case tests)
 
 ---
 
 ## 🚀 Getting Started
 
-From `C:\Users\surab\OneDrive\Desktop\Project`:
+From the project directory:
 
 ```bash
 # 1. Install dependencies

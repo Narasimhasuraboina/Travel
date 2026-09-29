@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { MapPin, Navigation, ExternalLink, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
+import { Navigation, ExternalLink, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
 import TrustIndicator from './TrustIndicator';
+import DestinationArtwork from './DestinationArtwork';
 
 /**
  * PlaceCard Component - High-End Travel Journal Aesthetic
  */
-export default function PlaceCard({ place, selectedMood }) {
+export default function PlaceCard({ place }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const {
@@ -18,7 +19,6 @@ export default function PlaceCard({ place, selectedMood }) {
     activities,
     attractions,
     matchingAttractions,
-    imageUrl,
     distanceKm,
     source,
     verified
@@ -32,36 +32,11 @@ export default function PlaceCard({ place, selectedMood }) {
 
   return (
     <article className="group bg-[#0f1015] border border-white/[0.07] hover:border-white/[0.18] rounded-2xl overflow-hidden transition-all duration-300 shadow-md hover:shadow-2xl flex flex-col justify-between">
-      {/* Photography Hero */}
-      <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-[#0a0b0e]">
-        <img
-          src={imageUrl}
-          alt={`${name}, ${state}`}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-[0.88] group-hover:brightness-95"
-          loading="lazy"
-          onError={(e) => {
-            e.currentTarget.onerror = null;
-            e.currentTarget.src = "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1000&q=80";
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0f1015] via-[#0f1015]/30 to-black/20" />
-
-        {/* Top Badges */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
-          <span className="px-2.5 py-1 rounded-md text-[10px] uppercase font-mono font-semibold bg-black/60 text-slate-200 backdrop-blur-md border border-white/10 tracking-wider">
-            {category}
-          </span>
+      {/* Destination illustration */}
+      <div className="relative">
+        <DestinationArtwork name={name} state={state} region={region} category={category} />
+        <div className="absolute right-4 top-12 z-10">
           <TrustIndicator source={source} verified={verified} />
-        </div>
-
-        {/* Bottom Headline */}
-        <div className="absolute bottom-3 left-4 right-4">
-          <div className="text-[10px] uppercase font-mono font-semibold tracking-widest text-amber-300/90 mb-0.5">
-            {state} • {region} India
-          </div>
-          <h3 className="font-serif text-2xl font-bold text-white tracking-tight drop-shadow-md">
-            {name}
-          </h3>
         </div>
       </div>
 

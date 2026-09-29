@@ -146,7 +146,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 80.648,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "visakhapatnam",
@@ -256,7 +255,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 83.2185,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1616859871166-3d2fc6a55543?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "araku-valley",
@@ -367,7 +365,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 82.8775,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "tirupati",
@@ -472,7 +469,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 79.4192,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "hyderabad",
@@ -617,7 +613,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 78.4867,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1626014303757-6467389178ec?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "warangal",
@@ -711,7 +706,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 79.5941,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1608958435020-e8a7109ba809?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "bengaluru",
@@ -819,7 +813,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 77.5946,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "mysuru",
@@ -916,7 +909,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 76.6394,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "hampi",
@@ -1025,7 +1017,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 76.46,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1600100397608-f010e42e4e1a?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "coorg",
@@ -1135,7 +1126,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 75.8069,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1583248352195-d3a8e766edf2?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "kochi",
@@ -1243,7 +1233,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 76.2673,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "munnar",
@@ -1354,7 +1343,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 77.0595,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "alappuzha",
@@ -1452,7 +1440,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 76.3388,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "varkala",
@@ -1551,7 +1538,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 76.7163,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "wayanad",
@@ -1658,7 +1644,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 76.132,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1593693411515-c20261bcad6e?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "thiruvananthapuram",
@@ -1753,7 +1738,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 76.9366,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "chennai",
@@ -1860,7 +1844,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 80.2707,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "madurai",
@@ -1954,7 +1937,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 78.1198,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1621847468516-1ed5d0df56fe?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "ooty",
@@ -2061,7 +2043,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 76.695,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "mahabalipuram",
@@ -2156,7 +2137,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 80.1927,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "puducherry",
@@ -2254,7 +2234,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 79.8083,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "goa",
@@ -2374,7 +2353,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 74.124,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "mumbai",
@@ -2494,7 +2472,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 72.8777,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "pune",
@@ -2590,7 +2567,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 73.8567,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "aurangabad",
@@ -2673,7 +2649,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 75.3433,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1604537466158-719b1972feb8?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "jaipur",
@@ -2781,7 +2756,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 75.7873,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "udaipur",
@@ -2888,7 +2862,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 73.7125,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1615836245337-f5b9b2303f10?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "jaisalmer",
@@ -2984,7 +2957,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 70.9083,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "delhi",
@@ -3115,7 +3087,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 77.209,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "agra",
@@ -3208,7 +3179,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 78.0081,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "varanasi",
@@ -3303,7 +3273,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 82.9739,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "lucknow",
@@ -3398,7 +3367,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 80.9462,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "amritsar",
@@ -3493,7 +3461,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 74.8723,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1588096344356-9b5709425895?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "manali",
@@ -3589,7 +3556,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 77.1892,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "shimla",
@@ -3684,7 +3650,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 77.1734,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1562920616-01869062330a?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "rishikesh",
@@ -3783,7 +3748,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 78.2676,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1605649487212-47bdab064df8?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "mussoorie",
@@ -3866,7 +3830,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 78.0644,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "srinagar",
@@ -3963,7 +3926,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 74.7973,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "gulmarg",
@@ -4050,7 +4012,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 74.3805,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "pahalgam",
@@ -4133,7 +4094,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 75.318,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "leh-ladakh",
@@ -4244,7 +4204,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 77.5771,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "kolkata",
@@ -4351,7 +4310,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 88.3639,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "darjeeling",
@@ -4449,7 +4407,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 88.2663,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1571536802807-30451e3955d8?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "bhubaneswar",
@@ -4544,7 +4501,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 85.8245,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "puri",
@@ -4639,7 +4595,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 85.8312,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "guwahati",
@@ -4722,7 +4677,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 91.7362,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1575550959106-5a7defe28b56?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "shillong",
@@ -4829,7 +4783,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 91.8933,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "gangtok",
@@ -4925,7 +4878,6 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 88.6065,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80"
   },
   {
     "id": "andaman-islands",
@@ -5020,6 +4972,5 @@ export const INDIAN_DESTINATIONS = [
     "longitude": 92.7265,
     "source": "curated",
     "verified": false,
-    "imageUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80"
   }
 ];
