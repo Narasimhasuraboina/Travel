@@ -71,6 +71,8 @@ export default function App() {
 
   const [spotifyRec, setSpotifyRec] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [recommendationError, setRecommendationError] = useState('');
+  const [recommendationRequest, setRecommendationRequest] = useState(0);
   const [visibleSongsCount, setVisibleSongsCount] = useState(6);
 
   const resultsRef = useRef(null);
@@ -81,7 +83,8 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    document.body.dataset.theme = theme;
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.content = theme === 'dark' ? '#101512' : '#f5f2ea';
     try {
       localStorage.setItem('moodtrip-theme', theme);
     } catch {
@@ -95,26 +98,36 @@ export default function App() {
 
     async function fetchData() {
       setIsLoading(true);
+      setRecommendationError('');
 
-      const placesRes = await getPlacesByMood({
-        mood: selectedMoodId,
-        userCity: cityInput,
-        userCoords: userCoords
-      });
+      try {
+        const placesRes = await getPlacesByMood({
+          mood: selectedMoodId,
+          userCity: cityInput,
+          userCoords
+        });
 
-      const songsRes = getSongsByMoodAndLanguage({
-        mood: selectedMoodId,
-        language: selectedLanguage
-      });
+        const songsRes = getSongsByMoodAndLanguage({
+          mood: selectedMoodId,
+          language: selectedLanguage
+        });
 
-      const spotifyResult = getSpotifyRecommendation(selectedMoodId, selectedLanguage);
+        const spotifyResult = getSpotifyRecommendation(selectedMoodId, selectedLanguage);
 
-      if (isCurrent) {
-        setPlacesData(placesRes);
-        setMusicData(songsRes);
-        setSpotifyRec(spotifyResult);
-        setVisibleSongsCount(6);
-        setIsLoading(false);
+        if (isCurrent) {
+          setPlacesData(placesRes);
+          setMusicData(songsRes);
+          setSpotifyRec(spotifyResult);
+          setVisibleSongsCount(6);
+        }
+      } catch {
+        if (isCurrent) {
+          setRecommendationError('We couldn’t load recommendations right now. Please try again.');
+        }
+      } finally {
+        if (isCurrent) {
+          setIsLoading(false);
+        }
       }
     }
 
@@ -123,7 +136,7 @@ export default function App() {
     return () => {
       isCurrent = false;
     };
-  }, [selectedMoodId, cityInput, selectedLanguage, userCoords]);
+  }, [selectedMoodId, cityInput, selectedLanguage, userCoords, recommendationRequest]);
 
   // Handle Mood Selection
   const handleSelectMood = (moodId) => {
@@ -262,6 +275,20 @@ export default function App() {
           </div>
         </section>
 
+        {recommendationError && (
+          <div role="alert" className="mb-8 flex flex-col gap-3 rounded-2xl border border-orange-500/30 bg-[#fff4dd] p-4 text-orange-900 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm">{recommendationError}</p>
+            <button
+              type="button"
+              onClick={() => setRecommendationRequest((request) => request + 1)}
+              disabled={isLoading}
+              className="rounded-xl border border-orange-500/30 px-4 py-2 text-sm font-semibold transition-colors hover:bg-orange-500/10 disabled:cursor-wait disabled:opacity-60"
+            >
+              {isLoading ? 'Retrying…' : 'Try again'}
+            </button>
+          </div>
+        )}
+
         {/* STEP 2: WHERE ARE YOU? (DEPARTURE LOCATION) */}
         <section className="mb-14">
           <div className="flex items-center gap-2 mb-3 pb-1">
@@ -287,6 +314,12 @@ export default function App() {
             </p>
           )}
         </section>
+
+        {isLoading && (
+          <p role="status" className="mb-6 text-sm text-stone-600" aria-live="polite">
+            Updating your recommendations…
+          </p>
+        )}
 
         {/* RECOMMENDATION RESULTS CONTAINER */}
         <div ref={resultsRef} className="pt-2 scroll-mt-20">

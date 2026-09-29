@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f5f2ea" />
     <meta name="description" content="Find a place in India for the mood you are in, with curated destination photography and regional music." />
+    <script>
+      try {
+        const theme = localStorage.getItem('moodtrip-theme') === 'dark' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#101512' : '#f5f2ea';
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    </script>
     <title>MoodTrip — Your mood. Your place. Your soundtrack.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

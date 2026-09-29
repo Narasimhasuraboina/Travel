@@ -32,7 +32,7 @@ export default function ActivityCard({ idea, index = 0 }) {
         </p>
 
         {suitableTimes && (
-          <div className="mt-3.5 flex items-start gap-2 text-xs text-stone-600 bg-black/40 p-2.5 rounded-xl border border-black/[0.05]">
+          <div className="mt-3.5 flex items-start gap-2 text-xs text-stone-600 bg-black/[0.04] p-2.5 rounded-xl border border-black/[0.05]">
             <Clock className="w-3.5 h-3.5 text-orange-700/80 shrink-0 mt-0.5" />
             <span><strong className="text-stone-700 font-medium">Optimal Window:</strong> {suitableTimes}</span>
           </div>

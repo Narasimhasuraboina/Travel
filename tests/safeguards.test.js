@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { existsSync, statSync } from 'node:fs';
+import path from 'node:path';
 import {
   getPlacesByMood,
   getTopPlacesInIndia,
@@ -326,6 +328,9 @@ describe('MoodTrip - INDIA-FIRST ACCURACY SAFEGUARD TEST SUITE (Rule 12 Complian
       expect(photo.license).toBeTruthy();
       expect(photo.licenseUrl).toMatch(/^https:\/\//);
       expect(photo.attraction).toBeTruthy();
+      const localImage = path.resolve('public', 'images', 'destinations', `${photo.id}.webp`);
+      expect(existsSync(localImage), `Missing optimized photo for ${photo.id}`).toBe(true);
+      expect(statSync(localImage).size).toBeGreaterThan(0);
     }
   });
 

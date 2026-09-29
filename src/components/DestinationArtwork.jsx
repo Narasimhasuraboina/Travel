@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Compass, Waves, Mountain, Landmark, Trees, Sun, Building2 } from 'lucide-react';
 
 const themes = {
@@ -15,8 +15,9 @@ const themes = {
 export default function DestinationArtwork({ name, state, region, category, photo, compact = false }) {
   const theme = themes[category] || themes.default;
   const Icon = theme.icon;
-  const [imageUnavailable, setImageUnavailable] = useState(false);
-  const hasPhoto = Boolean(photo?.imageUrl) && !imageUnavailable;
+  const [imageFallbackLevel, setImageFallbackLevel] = useState(0);
+  useEffect(() => setImageFallbackLevel(0), [photo?.id]);
+  const hasPhoto = Boolean(photo?.imageUrl) && imageFallbackLevel < 2;
   const creator = photo?.creator
     ?.replace(/<[^>]*>/g, ' ')
       .replace(/&amp;/g, '&')
@@ -33,13 +34,13 @@ export default function DestinationArtwork({ name, state, region, category, phot
     >
       {hasPhoto ? (
         <img
-          src={photo.imageUrl}
+          src={imageFallbackLevel === 0 ? `/images/destinations/${photo.id}.webp` : photo.imageUrl}
           alt={`${name}, featuring ${photo.attraction || category}`}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
           decoding="async"
           referrerPolicy="no-referrer"
-          onError={() => setImageUnavailable(true)}
+          onError={() => setImageFallbackLevel((level) => Math.min(level + 1, 2))}
         />
       ) : (
         <div role="img" aria-label={`Illustration for ${name}, ${state}`} className="absolute inset-0">

@@ -40,7 +40,7 @@ MoodTrip answers one fundamental emotional question:
 - **Destination photography**: Wikimedia Commons images matched to each destination landmark, with author and license credits shown on the cards; a labeled illustration is used if a photo cannot load
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
-- **Testing**: Vitest (27 automated safeguard and edge-case tests)
+- **Testing**: Vitest safeguard tests plus Playwright accessibility checks for light mode, dark mode, keyboard interaction, and mobile overflow
 
 ---
 
@@ -64,3 +64,15 @@ npm run build
 # 5. Preview production build
 npm run preview
 ```
+
+## Image assets
+
+Destination photography is served as optimized local WebP files, with each photo's Commons source, creator, and license retained in `src/data/destinationPhotos.json` and shown in the UI. To build missing files, run:
+
+```bash
+npm run images:build
+```
+
+Pass `-- --force` to refresh existing files after changing a photo's source URL.
+
+The GitHub Actions quality workflow runs the safeguard suite, browser accessibility checks in light and dark themes, and the production build for pushes and pull requests to `main`.

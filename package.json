@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run --pool=forks"
+    "test": "vitest run --pool=forks",
+    "test:a11y": "playwright test",
+    "images:build": "node scripts/build-destination-images.js"
   },
   "dependencies": {
     "framer-motion": "^13.4.4",
@@ -16,8 +18,11 @@
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/vite": "^4.3.3",
     "@vitejs/plugin-react": "^6.1.1",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
     "vite": "^8.3.1",
     "vitest": "^5.0.2"
