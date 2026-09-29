@@ -36,6 +36,13 @@ import {
 
 export default function App() {
   const [selectedMoodId, setSelectedMoodId] = useState('romantic');
+  const [theme, setTheme] = useState(() => {
+    try {
+      return localStorage.getItem('moodtrip-theme') === 'dark' ? 'dark' : 'light';
+    } catch {
+      return 'light';
+    }
+  });
   const [cityInput, setCityInput] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('Telugu');
 
@@ -71,6 +78,16 @@ export default function App() {
   const musicRef = useRef(null);
 
   const currentMood = getMoodById(selectedMoodId);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.body.dataset.theme = theme;
+    try {
+      localStorage.setItem('moodtrip-theme', theme);
+    } catch {
+      // Theme still works for this session when storage is unavailable.
+    }
+  }, [theme]);
 
   // Fetch recommendations whenever inputs change
   useEffect(() => {
@@ -170,7 +187,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f6f3ec] text-[#193128] flex flex-col selection:bg-orange-200 selection:text-orange-950 relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#f6f3ec] text-[#193128] flex flex-col selection:bg-orange-200 selection:text-orange-950 relative overflow-x-hidden transition-colors duration-300">
       {/* Subtle, restrained ambient lighting */}
       <div
         className="fixed top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[600px] pointer-events-none transition-all duration-1000 -z-10 blur-3xl opacity-20"
@@ -184,6 +201,8 @@ export default function App() {
         onSurpriseMe={handleSurpriseMe}
         onExploreTopPlaces={handleExploreTopPlaces}
         onScrollToMusic={handleScrollToMusic}
+        theme={theme}
+        onToggleTheme={() => setTheme((value) => value === 'light' ? 'dark' : 'light')}
       />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
