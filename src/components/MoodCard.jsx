@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 /**
  * MoodCard Component
- * Refined executive dark-mode card with hair-thin luxury borders and restrained accents.
+ * Interactive mood selector card with a clear hover and keyboard-focus state.
  */
 export default function MoodCard({ mood, isSelected, onSelect }) {
   const { name, evocativeTitle, emoji, tagline, colorTheme } = mood;
@@ -11,14 +11,15 @@ export default function MoodCard({ mood, isSelected, onSelect }) {
   return (
     <motion.button
       type="button"
-      whileHover={{ y: -2 }}
+      whileHover={{ y: -5, scale: 1.015 }}
       whileTap={{ scale: 0.99 }}
-      transition={{ duration: 0.15 }}
+      transition={{ type: 'spring', stiffness: 360, damping: 24 }}
       onClick={() => onSelect(mood.id)}
-      className={`group relative text-left p-4 sm:p-5 rounded-xl border transition-all duration-200 flex flex-col justify-between overflow-hidden cursor-pointer ${
+      aria-pressed={isSelected}
+      className={`group relative text-left p-4 sm:p-5 rounded-xl border transition-all duration-200 flex flex-col justify-between overflow-hidden cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f6f3ec] ${
         isSelected
           ? 'bg-[#f6ecdb] border-orange-500/60 shadow-lg shadow-black/10 ring-1 ring-orange-500/30'
-          : 'bg-[#fffdf8] hover:bg-[#f5efe3] border-black/[0.07] hover:border-black/[0.18] shadow-sm'
+          : 'bg-[#fffdf8] hover:bg-[#f5efe3] border-black/[0.07] hover:border-orange-500/60 hover:shadow-xl hover:shadow-orange-950/10 shadow-sm'
       }`}
     >
       <div>
