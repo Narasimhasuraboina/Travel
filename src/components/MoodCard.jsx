@@ -17,8 +17,8 @@ export default function MoodCard({ mood, isSelected, onSelect }) {
       onClick={() => onSelect(mood.id)}
       className={`group relative text-left p-4 sm:p-5 rounded-xl border transition-all duration-200 flex flex-col justify-between overflow-hidden cursor-pointer ${
         isSelected
-          ? 'bg-[#14161f] border-amber-400/60 shadow-lg shadow-black/40 ring-1 ring-amber-400/30'
-          : 'bg-[#101116] hover:bg-[#15161d] border-white/[0.07] hover:border-white/[0.18] shadow-sm'
+          ? 'bg-[#f6ecdb] border-orange-500/60 shadow-lg shadow-black/10 ring-1 ring-orange-500/30'
+          : 'bg-[#fffdf8] hover:bg-[#f5efe3] border-black/[0.07] hover:border-black/[0.18] shadow-sm'
       }`}
     >
       <div>
@@ -29,8 +29,8 @@ export default function MoodCard({ mood, isSelected, onSelect }) {
           </span>
           <span className={`text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded border transition-colors ${
             isSelected
-              ? 'bg-amber-400/10 text-amber-200 border-amber-400/30'
-              : 'bg-white/[0.03] text-slate-400 border-white/[0.06]'
+              ? 'bg-orange-400/10 text-orange-800 border-orange-400/30'
+              : 'bg-black/[0.03] text-stone-600 border-black/[0.06]'
           }`}>
             {evocativeTitle || name}
           </span>
@@ -38,21 +38,21 @@ export default function MoodCard({ mood, isSelected, onSelect }) {
 
         {/* Mood Name */}
         <h3 className={`font-serif text-lg font-bold tracking-tight transition-colors ${
-          isSelected ? 'text-white' : 'text-slate-200 group-hover:text-white'
+          isSelected ? 'text-[#193128]' : 'text-stone-800 group-hover:text-[#193128]'
         }`}>
           {name}
         </h3>
 
         {/* Description */}
-        <p className="text-xs text-slate-400 mt-1 leading-relaxed line-clamp-2 font-normal">
+        <p className="text-xs text-stone-600 mt-1 leading-relaxed line-clamp-2 font-normal">
           {tagline}
         </p>
       </div>
 
       {/* Card Footnote */}
-      <div className="mt-3.5 pt-2.5 border-t border-white/[0.05] flex items-center justify-between text-[11px] font-medium text-slate-500 group-hover:text-slate-300 transition-colors">
+      <div className="mt-3.5 pt-2.5 border-t border-black/[0.05] flex items-center justify-between text-[11px] font-medium text-stone-500 group-hover:text-stone-700 transition-colors">
         <span>Explore resonance</span>
-        <span className="text-slate-400 transition-transform group-hover:translate-x-1">→</span>
+        <span className="text-stone-600 transition-transform group-hover:translate-x-1">→</span>
       </div>
     </motion.button>
   );

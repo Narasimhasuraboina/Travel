@@ -13,6 +13,7 @@ import {
 } from '../src/services/geolocationService';
 import { validateAiOutput } from '../src/services/aiSafeguardService';
 import { INDIAN_DESTINATIONS } from '../src/data/indianDestinations';
+import DESTINATION_PHOTOS from '../src/data/destinationPhotos.json';
 import { INDIAN_SONGS, INDIAN_LANGUAGES } from '../src/data/indianSongs';
 import { MOODS } from '../src/data/moods';
 import { getIndianActivitiesForMood } from '../src/data/indianActivities';
@@ -305,14 +306,26 @@ describe('MoodTrip - INDIA-FIRST ACCURACY SAFEGUARD TEST SUITE (Rule 12 Complian
     expect(allDeps).not.toHaveProperty('@rolldown/binding-darwin-arm64');
   });
 
-  // Test 22: Destination data integrity and no unverified image URLs
-  it('Every destination has valid descriptions and no unverified photo URLs', () => {
+  // Test 22: Destination descriptions and photo attribution integrity
+  it('Every destination has valid descriptions and each photo has source and license attribution', () => {
     for (const d of INDIAN_DESTINATIONS) {
       expect(d).not.toHaveProperty('imageUrl');
       expect(d.shortDescription.length).toBeGreaterThan(20);
       expect(d.activities.length).toBeGreaterThan(0);
       expect(d.source).toBe('curated');
       expect(d.verified).toBe(false);
+    }
+
+    expect(DESTINATION_PHOTOS).toHaveLength(INDIAN_DESTINATIONS.length);
+    expect(new Set(DESTINATION_PHOTOS.map(photo => photo.id)).size).toBe(INDIAN_DESTINATIONS.length);
+    for (const photo of DESTINATION_PHOTOS) {
+      expect(INDIAN_DESTINATIONS.some(destination => destination.id === photo.id)).toBe(true);
+      expect(photo.imageUrl).toMatch(/^https:\/\//);
+      expect(photo.filePageUrl).toMatch(/^https:\/\/commons\.wikimedia\.org\//);
+      expect(photo.creator).toBeTruthy();
+      expect(photo.license).toBeTruthy();
+      expect(photo.licenseUrl).toMatch(/^https:\/\//);
+      expect(photo.attraction).toBeTruthy();
     }
   });
 

@@ -37,6 +37,7 @@ MoodTrip answers one fundamental emotional question:
 ## 🛠️ Technology Stack
 - **Framework**: React 19 + Vite
 - **Styling**: Tailwind CSS v4 + Plus Jakarta Sans & JetBrains Mono typography
+- **Destination photography**: Wikimedia Commons images matched to each destination landmark, with author and license credits shown on the cards; a labeled illustration is used if a photo cannot load
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
 - **Testing**: Vitest (27 automated safeguard and edge-case tests)

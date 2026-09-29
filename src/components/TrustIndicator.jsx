@@ -7,8 +7,8 @@ import { Sparkles, CheckCircle2, Compass } from 'lucide-react';
 export default function TrustIndicator({ source = 'curated', verified = false, isActivityIdea = false }) {
   if (isActivityIdea) {
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] uppercase font-mono font-medium bg-white/[0.04] text-slate-300 border border-white/[0.08]" title="Generic mood-based activity idea — does not claim to be a specific local business or place.">
-        <Compass className="w-3 h-3 text-amber-300" />
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] uppercase font-mono font-medium bg-black/[0.04] text-stone-700 border border-black/[0.08]" title="Generic mood-based activity idea — does not claim to be a specific local business or place.">
+        <Compass className="w-3 h-3 text-orange-800" />
         Activity Idea
       </span>
     );
@@ -24,8 +24,8 @@ export default function TrustIndicator({ source = 'curated', verified = false, i
   }
 
   return (
-    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] uppercase font-mono font-medium bg-white/[0.04] text-slate-300 border border-white/[0.08] backdrop-blur-md" title="Curated recommendation — verify current details before visiting.">
-      <Sparkles className="w-3 h-3 text-amber-300" />
+    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] uppercase font-mono font-medium bg-black/[0.04] text-stone-700 border border-black/[0.08] backdrop-blur-md" title="Curated recommendation — verify current details before visiting.">
+      <Sparkles className="w-3 h-3 text-orange-800" />
       Curated
     </span>
   );

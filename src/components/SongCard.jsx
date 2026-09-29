@@ -17,41 +17,41 @@ export default function SongCard({ song, index = 0 }) {
   } = song;
 
   return (
-    <div className="group bg-[#0f1015] hover:bg-[#13151c] border border-white/[0.07] hover:border-white/[0.18] rounded-xl p-4 sm:p-5 transition-all duration-200 shadow-sm flex flex-col justify-between">
+    <div className="group bg-[#fffdf8] hover:bg-[#f5efe3] border border-black/[0.07] hover:border-black/[0.18] rounded-xl p-4 sm:p-5 transition-all duration-200 shadow-sm flex flex-col justify-between">
       <div>
         {/* Top Badges */}
         <div className="flex items-center justify-between gap-2 mb-3">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-[10px] font-semibold text-slate-500 bg-white/[0.03] px-2 py-0.5 rounded border border-white/[0.05]">
+            <span className="font-mono text-[10px] font-semibold text-stone-500 bg-black/[0.03] px-2 py-0.5 rounded border border-black/[0.05]">
               {String(index + 1).padStart(2, '0')}
             </span>
-            <span className="font-mono text-[10px] font-bold tracking-wider px-2 py-0.5 rounded bg-amber-400/15 text-amber-300 border border-amber-400/30 uppercase">
+            <span className="font-mono text-[10px] font-bold tracking-wider px-2 py-0.5 rounded bg-orange-400/15 text-orange-800 border border-orange-400/30 uppercase">
               {language}
             </span>
           </div>
 
-          <span className="text-[11px] text-slate-400 font-mono truncate max-w-[150px]">
+          <span className="text-[11px] text-stone-600 font-mono truncate max-w-[150px]">
             {movieOrAlbum} {year ? `• ${year}` : ''}
           </span>
         </div>
 
         {/* Track Title */}
-        <h4 className="font-serif text-lg font-bold text-white group-hover:text-amber-200 transition-colors">
+        <h4 className="font-serif text-lg font-bold text-[#193128] group-hover:text-orange-800 transition-colors">
           {title}
         </h4>
-        <p className="text-xs text-slate-400 font-medium mt-0.5">
+        <p className="text-xs text-stone-600 font-medium mt-0.5">
           {artist}
         </p>
 
         {/* Description */}
-        <p className="text-xs text-slate-400/90 mt-2 leading-relaxed font-light line-clamp-2">
+        <p className="text-xs text-stone-600/90 mt-2 leading-relaxed font-light line-clamp-2">
           {description}
         </p>
       </div>
 
       {/* Listening Links */}
-      <div className="mt-4 pt-3 border-t border-white/[0.05] flex items-center justify-between gap-2">
-        <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500">
+      <div className="mt-4 pt-3 border-t border-black/[0.05] flex items-center justify-between gap-2">
+        <span className="text-[10px] uppercase font-mono tracking-wider text-stone-500">
           Listen
         </span>
         <div className="flex items-center gap-2">
@@ -60,7 +60,7 @@ export default function SongCard({ song, index = 0 }) {
               href={spotifyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-[#1db954]/15 text-slate-200 hover:text-[#1ed760] text-xs font-medium border border-white/10 hover:border-[#1db954]/30 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/[0.04] hover:bg-[#1db954]/15 text-stone-800 hover:text-[#1ed760] text-xs font-medium border border-black/10 hover:border-[#1db954]/30 transition-all cursor-pointer"
               title={`Listen to ${title} on Spotify`}
             >
               <Play className="w-3 h-3 fill-current" />
@@ -72,7 +72,7 @@ export default function SongCard({ song, index = 0 }) {
               href={youtubeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-red-500/15 text-slate-200 hover:text-red-300 text-xs font-medium border border-white/10 hover:border-red-500/30 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/[0.04] hover:bg-red-500/15 text-stone-800 hover:text-red-300 text-xs font-medium border border-black/10 hover:border-red-500/30 transition-all cursor-pointer"
               title={`Watch ${title} on YouTube`}
             >
               <ExternalLink className="w-3 h-3" />

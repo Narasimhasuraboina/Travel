@@ -14,6 +14,9 @@
 
 import { INDIAN_DESTINATIONS } from '../data/indianDestinations';
 import { getIndianActivitiesForMood } from '../data/indianActivities';
+import destinationPhotos from '../data/destinationPhotos.json';
+
+const photosByDestination = new Map(destinationPhotos.map((photo) => [photo.id, photo]));
 
 /**
  * Calculates spherical Haversine distance in kilometers.
@@ -125,6 +128,7 @@ function enrichDestination(dest, userCoords, currentMood) {
     activities: dest.activities || [],
     attractions: allAttractions,
     matchingAttractions: displayAttractions,
+    photo: photosByDestination.get(dest.id) || null,
     latitude: typeof dest.latitude === 'number' ? dest.latitude : null,
     longitude: typeof dest.longitude === 'number' ? dest.longitude : null,
     source: dest.source || 'curated',
@@ -261,6 +265,7 @@ export function getTopPlacesInIndia({ category = 'all', searchQuery = '' } = {})
     description: d.shortDescription,
     activities: d.activities || [],
     attractions: d.attractions || [],
+    photo: photosByDestination.get(d.id) || null,
     source: 'curated',
     verified: false
   }));
